@@ -1,0 +1,32 @@
+{
+  "name": "algomentor-backend",
+  "version": "1.0.0",
+  "description": "AlgoMentor MVP - Pattern-based interview learning with AI",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Tests coming soon\" && exit 0"
+  },
+  "keywords": ["interview-prep", "algorithms", "ai-tutor", "patterns"],
+  "author": "Nitesh",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "zod": "^3.22.4",
+    "@supabase/supabase-js": "^2.45.0",
+    "openai": "^4.75.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.10.0",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2"
+  }
+}
