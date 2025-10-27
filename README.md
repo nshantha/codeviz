@@ -1,9 +1,9 @@
 # AlgoMentor - AI-Powered Interview Mastery System
 
 **Status**: Architecture Design Phase
-**Competition**: Claude Sonnet 4.5 Competition ("Keep Learning" Award)
+**Competition**: AI Interview Prep Innovation Challenge
 **Timeline**: 7 days
-**Tech Stack**: TypeScript, Express.js, PostgreSQL, Claude Sonnet 4.5
+**Tech Stack**: TypeScript, Express.js, PostgreSQL (Supabase), OpenAI GPT-5
 
 ---
 
@@ -205,7 +205,7 @@ This system is built on proven learning science:
 ### Backend
 - **Framework**: Express.js + TypeScript
 - **Database**: PostgreSQL + Prisma ORM
-- **AI**: Anthropic Claude Sonnet 4.5
+- **AI**: OpenAI GPT-5
 - **Code Execution**: Judge0 API
 - **Authentication**: JWT + bcrypt
 - **Validation**: Zod
@@ -338,4 +338,4 @@ For questions during the competition, reach out via Discord: [Competition Channe
 
 ---
 
-Built with ❤️ for the Claude Sonnet 4.5 Competition
+Built with ❤️ using OpenAI GPT-5 and Supabase

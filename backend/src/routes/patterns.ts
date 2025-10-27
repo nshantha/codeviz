@@ -69,10 +69,11 @@ router.get('/:id', async (req: Request, res: Response) => {
       .single();
 
     if (error || !pattern) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         error: 'Pattern not found'
       });
+      return;
     }
 
     // Get related problems

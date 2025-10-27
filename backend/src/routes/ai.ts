@@ -3,21 +3,9 @@ import { z } from 'zod';
 import { getAIServiceFactory } from '../services/ai';
 import { PatternRecognitionService } from '../services/ai/pattern-recognition';
 import { HintGeneratorService } from '../services/ai/hint-generator';
+import { IdentifyPatternSchema, GenerateHintSchema } from './schemas';
 
 const router = Router();
-
-// Validation schemas
-const IdentifyPatternSchema = z.object({
-  problemDescription: z.string().min(10, 'Problem description too short'),
-});
-
-const GenerateHintSchema = z.object({
-  problemId: z.string().uuid(),
-  problemDescription: z.string().min(10),
-  userCode: z.string().optional(),
-  hintLevel: z.number().int().min(1).max(5).default(1),
-  hintsGiven: z.array(z.string()).optional().default([]),
-});
 
 /**
  * POST /api/ai/identify-pattern
@@ -41,11 +29,12 @@ router.post('/identify-pattern', async (req: Request, res: Response) => {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: 'Validation failed',
         details: error.errors,
       });
+      return;
     }
 
     console.error('Error identifying pattern:', error);
@@ -53,6 +42,7 @@ router.post('/identify-pattern', async (req: Request, res: Response) => {
       success: false,
       error: 'Failed to identify pattern'
     });
+    return;
   }
 });
 
@@ -78,11 +68,12 @@ router.post('/hint', async (req: Request, res: Response) => {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: 'Validation failed',
         details: error.errors,
       });
+      return;
     }
 
     console.error('Error generating hint:', error);
@@ -90,6 +81,7 @@ router.post('/hint', async (req: Request, res: Response) => {
       success: false,
       error: 'Failed to generate hint'
     });
+    return;
   }
 });
 

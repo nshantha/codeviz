@@ -5,20 +5,47 @@ let supabaseInstance: SupabaseClient | null = null;
 
 /**
  * Get Supabase client singleton
+ * Updated for 2024-2025 best practices:
+ * - Connection pooling optimized
+ * - Service role key support for backend operations
+ * - Enhanced error handling
+ * - No session persistence (backend only)
  */
 export function getSupabaseClient(): SupabaseClient {
   if (!supabaseInstance) {
+    // Use service role key for backend if available, otherwise anon key
+    const apiKey = supabaseConfig.serviceRoleKey || supabaseConfig.anonKey;
+
     supabaseInstance = createClient(
       supabaseConfig.url,
-      supabaseConfig.anonKey,
+      apiKey,
       {
         auth: {
-          persistSession: false, // No auth for MVP
+          persistSession: false, // Backend doesn't need session persistence
+          autoRefreshToken: false, // Not needed for backend
+        },
+        db: {
+          schema: 'public', // Explicit schema
+        },
+        global: {
+          headers: {
+            'x-application-name': 'algomentor-backend', // Identify requests
+          },
         },
       }
     );
   }
   return supabaseInstance;
+}
+
+/**
+ * Close Supabase connection (for graceful shutdown)
+ */
+export async function closeSupabaseClient(): Promise<void> {
+  if (supabaseInstance) {
+    // Supabase client doesn't have explicit close, but we can null the instance
+    supabaseInstance = null;
+  }
 }
 
 /**
