@@ -9,9 +9,9 @@ const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.string().transform(Number).default('3000'),
 
-  // OpenAI GPT-5
+  // OpenAI GPT-5-mini
   OPENAI_API_KEY: z.string().min(1, 'OpenAI API key is required'),
-  OPENAI_MODEL: z.string().default('gpt-5'),
+  OPENAI_MODEL: z.string().default('gpt-5-mini-2025-08-07'),
   OPENAI_MAX_TOKENS: z.string().transform(Number).default('4000'),
   OPENAI_TEMPERATURE: z.string().transform(Number).default('0.7'),
 

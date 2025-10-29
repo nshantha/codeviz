@@ -24,3 +24,19 @@ export {
 } from './socratic-hints';
 
 export type { HintLevel } from './socratic-hints';
+
+// Aliases for compatibility
+export { socraticHintResponseFormat as hintResponseFormat } from './socratic-hints';
+
+// HintContext type
+export interface HintContext {
+  problemId: string;
+  problemDescription: string;
+  userCode?: string;
+  hintLevel: number;
+  hintsGiven?: string[];
+  problemsSolved?: number;
+  currentMastery?: number;
+  recentAttempts?: number;
+  successRate?: number;
+}

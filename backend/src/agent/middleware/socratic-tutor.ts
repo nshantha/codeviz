@@ -113,7 +113,14 @@ export class SocraticTutorMiddleware implements AgentMiddleware {
                 },
                 {
                   role: 'user',
-                  content: buildSocraticHintPrompt(args),
+                  content: buildSocraticHintPrompt({
+                    problemDescription: args.problemDescription,
+                    userCode: args.userCode,
+                    hintLevel: args.hintLevel,
+                    hintsGiven: args.hintsGiven || [],
+                    problemsSolved: args.problemsSolved || 0,
+                    currentMastery: args.currentMastery || 0.5,
+                  }),
                 },
               ],
               response_format: hintResponseFormat as any,

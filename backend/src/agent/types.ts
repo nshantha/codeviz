@@ -158,7 +158,7 @@ export interface AgentConfig {
  */
 export interface AgentExecutor {
   invoke(input: { messages: ChatCompletionMessageParam[] }): Promise<AgentState>;
-  stream?(input: { messages: ChatCompletionMessageParam[] }): AsyncIterableIterator<any>;
+  stream(input: { messages: ChatCompletionMessageParam[] }): AsyncIterableIterator<any>;
 }
 
 /**

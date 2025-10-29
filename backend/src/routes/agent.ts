@@ -11,6 +11,7 @@ import {
   SocraticTutorMiddleware,
   KnowledgeTrackerMiddleware,
   SubAgentMiddleware,
+  VisualizationMiddleware,
 } from '../agent';
 
 const router = Router();
@@ -68,6 +69,7 @@ router.post('/chat', async (req: Request, res: Response) => {
 - Help students master algorithmic patterns through Socratic questioning
 - Identify patterns in coding problems
 - Provide progressive hints without giving away solutions
+- Create visual explanations when helpful
 - Track and encourage progress
 - Build confidence through guided discovery
 
@@ -79,6 +81,7 @@ ${context?.studentId ? `- Student ID: ${context.studentId}` : ''}
 **Guidelines:**
 - Use tools proactively to help students
 - Start with identify_pattern when they describe a problem
+- Use create_visualization to show how algorithms work
 - Use generate_hint when they're stuck
 - Update mastery after problem attempts
 - Show progress when they ask
@@ -87,6 +90,7 @@ ${context?.studentId ? `- Student ID: ${context.studentId}` : ''}
         new PatternRecognitionMiddleware(),
         new SocraticTutorMiddleware(),
         new KnowledgeTrackerMiddleware(),
+        new VisualizationMiddleware(),
         new SubAgentMiddleware({
           enableGeneralPurpose: true,
           subagents: [
@@ -137,6 +141,7 @@ ${context?.studentId ? `- Student ID: ${context.studentId}` : ''}
         hintsGiven: result.hintsGiven || [],
         knowledgeUpdates: result.knowledgeUpdates || [],
         subagentExecutions: result.subagentExecutions || [],
+        visualizations: result.visualizations || [],
       },
     });
   } catch (error: any) {
@@ -150,14 +155,123 @@ ${context?.studentId ? `- Student ID: ${context.studentId}` : ''}
 
 /**
  * POST /api/agent/stream
- * Streaming version of agent chat (future implementation)
+ * Streaming version of agent chat with Server-Sent Events (SSE)
  */
 router.post('/stream', async (req: Request, res: Response) => {
-  res.status(501).json({
-    success: false,
-    error: 'Streaming not yet implemented for agent system',
-    message: 'Use POST /api/agent/chat for now',
-  });
+  try {
+    // 1. Validate request
+    const validation = AgentRequestSchema.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: validation.error.errors,
+      });
+    }
+
+    const { messages, context } = validation.data;
+
+    // 2. Set up SSE headers
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('X-Accel-Buffering', 'no'); // Disable buffering in nginx
+
+    // 3. Create agent
+    const agent = createDeepAgent({
+      systemPrompt: `You are an expert coding interview tutor for AlgoMentor.
+
+**Your Role:**
+- Help students master algorithmic patterns through Socratic questioning
+- Identify patterns in coding problems
+- Provide progressive hints without giving away solutions
+- Create visual explanations when helpful
+- Track and encourage progress
+- Build confidence through guided discovery
+
+**Student Context:**
+${context?.problemId ? `- Current Problem: ${context.problemId}` : ''}
+${context?.patternId ? `- Current Pattern: ${context.patternId}` : ''}
+${context?.studentId ? `- Student ID: ${context.studentId}` : ''}
+
+**Guidelines:**
+- Use tools proactively to help students
+- Start with identify_pattern when they describe a problem
+- Use create_visualization to show how algorithms work
+- Use generate_hint when they're stuck
+- Update mastery after problem attempts
+- Show progress when they ask
+- Be encouraging and patient`,
+      middleware: [
+        new PatternRecognitionMiddleware(),
+        new SocraticTutorMiddleware(),
+        new KnowledgeTrackerMiddleware(),
+        new VisualizationMiddleware(),
+        new SubAgentMiddleware({
+          enableGeneralPurpose: true,
+          subagents: [],
+        }),
+      ],
+      debug: false,
+    });
+
+    // 4. Send initial connection message
+    res.write(`data: ${JSON.stringify({ type: 'connected' })}\n\n`);
+
+    // 5. Stream agent execution with true token-by-token streaming
+    try {
+      const streamGenerator = agent.stream({ messages });
+
+      for await (const chunk of streamGenerator) {
+        // Send each chunk as SSE
+        res.write(`data: ${JSON.stringify(chunk)}\n\n`);
+
+        // Handle final state
+        if (chunk.type === 'done') {
+          // Send metadata from final state
+          const finalState = chunk.state;
+          res.write(`data: ${JSON.stringify({
+            type: 'metadata',
+            metadata: {
+              toolsUsed: finalState.messages.filter((m: any) => m.role === 'tool').length,
+              identifiedPatterns: finalState.identifiedPatterns || [],
+              hintsGiven: finalState.hintsGiven || [],
+              knowledgeUpdates: finalState.knowledgeUpdates || [],
+              subagentExecutions: finalState.subagentExecutions || [],
+              visualizations: finalState.visualizations || [],
+            },
+          })}\n\n`);
+        }
+      }
+
+      // 6. End stream
+      res.write(`data: ${JSON.stringify({ type: 'complete' })}\n\n`);
+      res.end();
+    } catch (streamError: any) {
+      // Handle streaming errors gracefully (e.g., OpenAI org not verified)
+      console.error('Agent streaming error:', streamError.message);
+      res.write(`data: ${JSON.stringify({
+        type: 'error',
+        error: streamError.message || 'Streaming not available',
+      })}\n\n`);
+      res.end();
+    }
+
+  } catch (error: any) {
+    console.error('Agent streaming setup error:', error);
+    if (!res.headersSent) {
+      res.status(500).json({
+        success: false,
+        error: error.message || 'Failed to initialize stream',
+      });
+    } else {
+      res.write(`data: ${JSON.stringify({
+        type: 'error',
+        error: error.message || 'Agent execution failed',
+      })}\n\n`);
+      res.end();
+    }
+  }
 });
 
 export default router;

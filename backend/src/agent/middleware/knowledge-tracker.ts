@@ -271,17 +271,20 @@ export class KnowledgeTrackerMiddleware implements AgentMiddleware {
 
             return {
               success: true,
-              recommendations: patterns?.map(p => ({
-                patternId: p.pattern_id,
-                patternName: p.patterns?.name,
-                difficulty: p.patterns?.difficulty,
-                currentMastery: p.mastery_probability,
-                status: p.status,
-                reason:
-                  p.status === 'Practicing'
-                    ? 'You\'re making good progress on this pattern'
-                    : 'This pattern is ready for practice',
-              })),
+              recommendations: patterns?.map(p => {
+                const patternData = Array.isArray(p.patterns) ? p.patterns[0] : p.patterns;
+                return {
+                  patternId: p.pattern_id,
+                  patternName: patternData?.name,
+                  difficulty: patternData?.difficulty,
+                  currentMastery: p.mastery_probability,
+                  status: p.status,
+                  reason:
+                    p.status === 'Practicing'
+                      ? 'You\'re making good progress on this pattern'
+                      : 'This pattern is ready for practice',
+                };
+              }),
             };
           } catch (error: any) {
             console.error('Recommendations error:', error);

@@ -269,6 +269,167 @@ export class AgentExecutor implements IAgentExecutor {
   }
 
   /**
+   * Streaming execution method with Server-Sent Events
+   * Streams token-by-token responses while handling tool calls
+   */
+  async *stream(input: { messages: ChatCompletionMessageParam[] }): AsyncGenerator<any> {
+    const state: AgentState = {
+      messages: [...input.messages],
+    };
+
+    // Initialize state from middleware
+    this.middleware.forEach(mw => {
+      if (mw.initializeState) {
+        mw.initializeState(state);
+      }
+    });
+
+    // Prepend system prompt
+    const systemMessage: ChatCompletionMessageParam = {
+      role: 'system',
+      content: this.buildSystemPrompt(),
+    };
+    state.messages.unshift(systemMessage);
+
+    let iterations = 0;
+
+    // Agent loop with streaming
+    while (iterations < this.maxIterations) {
+      iterations++;
+
+      yield { type: 'status', content: `Thinking... (iteration ${iterations})` };
+
+      // Prepare model request
+      let modelRequest: ModelRequest = {
+        messages: state.messages,
+        tools: this.getToolSchemas(),
+        model: this.model,
+        temperature: this.temperature,
+        max_tokens: this.maxTokens,
+      };
+
+      // Run beforeModelCall middleware hooks
+      for (const mw of this.middleware) {
+        if (mw.beforeModelCall) {
+          modelRequest = await mw.beforeModelCall(modelRequest, state);
+        }
+      }
+
+      // Call model with streaming
+      let stream;
+      try {
+        stream = await this.client.chat.completions.create({
+          model: modelRequest.model!,
+          messages: modelRequest.messages,
+          tools: modelRequest.tools,
+          temperature: modelRequest.temperature,
+          max_completion_tokens: modelRequest.max_tokens,
+          stream: true,
+        });
+      } catch (streamError: any) {
+        // If streaming fails (e.g., org not verified), yield error and return
+        this.log('Streaming failed:', streamError.message);
+        yield { type: 'error', error: streamError.message };
+        return;
+      }
+
+      let fullContent = '';
+      let toolCalls: any[] = [];
+      let currentToolCall: any = null;
+
+      // Process stream chunks
+      for await (const chunk of stream) {
+        const delta = chunk.choices[0]?.delta;
+
+        // Stream content tokens
+        if (delta?.content) {
+          fullContent += delta.content;
+          yield { type: 'content', content: delta.content };
+        }
+
+        // Collect tool calls
+        if (delta?.tool_calls) {
+          for (const toolCall of delta.tool_calls) {
+            if (toolCall.index !== undefined) {
+              if (!toolCalls[toolCall.index]) {
+                toolCalls[toolCall.index] = {
+                  id: toolCall.id || '',
+                  type: 'function',
+                  function: { name: '', arguments: '' },
+                };
+              }
+
+              if (toolCall.id) {
+                toolCalls[toolCall.index].id = toolCall.id;
+              }
+
+              if (toolCall.function?.name) {
+                toolCalls[toolCall.index].function.name = toolCall.function.name;
+                yield {
+                  type: 'tool_call_start',
+                  tool: toolCall.function.name
+                };
+              }
+
+              if (toolCall.function?.arguments) {
+                toolCalls[toolCall.index].function.arguments += toolCall.function.arguments;
+              }
+            }
+          }
+        }
+      }
+
+      // Add assistant message to state
+      const assistantMessage: ChatCompletionMessageParam = {
+        role: 'assistant',
+        content: fullContent || null,
+        tool_calls: toolCalls.length > 0 ? toolCalls : undefined,
+      };
+      state.messages.push(assistantMessage);
+
+      // Check if we're done
+      if (toolCalls.length === 0) {
+        yield { type: 'done', state };
+        break;
+      }
+
+      // Execute tool calls
+      yield { type: 'status', content: `Executing ${toolCalls.length} tools...` };
+
+      const parsedToolCalls = toolCalls.map(tc => ({
+        id: tc.id,
+        name: tc.function.name,
+        arguments: JSON.parse(tc.function.arguments),
+      }));
+
+      const toolResults = await this.executeTools(parsedToolCalls, state);
+
+      // Stream tool results
+      for (const result of toolResults) {
+        yield {
+          type: 'tool_result',
+          tool: parsedToolCalls.find(tc => tc.id === result.toolCallId)?.name,
+          result: result.result,
+          error: result.error,
+        };
+
+        const toolMessage: ChatCompletionMessageParam = {
+          role: 'tool',
+          tool_call_id: result.toolCallId,
+          content: result.error || JSON.stringify(result.result),
+        };
+        state.messages.push(toolMessage);
+      }
+    }
+
+    if (iterations >= this.maxIterations) {
+      yield { type: 'error', content: 'Max iterations reached' };
+    }
+
+    return state;
+  }
+
+  /**
    * Debug logging
    */
   private log(message: string, data?: any) {

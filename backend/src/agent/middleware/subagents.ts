@@ -52,21 +52,22 @@ export class SubAgentMiddleware implements AgentMiddleware {
     // Compile subagents
     const subagents = config.subagents || [];
     subagents.forEach(subagent => {
-      if ('runnable' in subagent) {
+      if ('executor' in subagent) {
         // Pre-compiled
-        this.subagents.set(subagent.name, subagent);
+        this.subagents.set(subagent.name, subagent as CompiledSubAgent);
       } else {
         // Need to compile
+        const sa = subagent as SubAgent;
         const executor = createDeepAgent({
-          model: subagent.model,
-          systemPrompt: subagent.systemPrompt,
-          tools: subagent.tools,
-          middleware: [...this.defaultMiddleware, ...(subagent.middleware || [])],
+          model: sa.model,
+          systemPrompt: sa.systemPrompt,
+          tools: sa.tools,
+          middleware: [...this.defaultMiddleware, ...(sa.middleware || [])],
         });
 
-        this.subagents.set(subagent.name, {
-          name: subagent.name,
-          description: subagent.description,
+        this.subagents.set(sa.name, {
+          name: sa.name,
+          description: sa.description,
           executor,
         });
       }
