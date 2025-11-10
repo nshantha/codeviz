@@ -75,9 +75,10 @@ export class AgentExecutor implements IAgentExecutor {
    * Main execution method - runs the agent loop
    * Equivalent to graph.invoke() in LangGraph
    */
-  async invoke(input: { messages: ChatCompletionMessageParam[] }): Promise<AgentState> {
+  async invoke(input: { messages: ChatCompletionMessageParam[]; [key: string]: any }): Promise<AgentState> {
     const state: AgentState = {
       messages: [...input.messages],
+      ...input, // Spread all additional properties into state
     };
 
     // Initialize state from middleware
@@ -272,9 +273,10 @@ export class AgentExecutor implements IAgentExecutor {
    * Streaming execution method with Server-Sent Events
    * Streams token-by-token responses while handling tool calls
    */
-  async *stream(input: { messages: ChatCompletionMessageParam[] }): AsyncGenerator<any> {
+  async *stream(input: { messages: ChatCompletionMessageParam[]; [key: string]: any }): AsyncGenerator<any> {
     const state: AgentState = {
       messages: [...input.messages],
+      ...input, // Spread all additional properties into state
     };
 
     // Initialize state from middleware
