@@ -157,8 +157,8 @@ export interface AgentConfig {
  * Agent executor - runs the agent loop
  */
 export interface AgentExecutor {
-  invoke(input: { messages: ChatCompletionMessageParam[] }): Promise<AgentState>;
-  stream(input: { messages: ChatCompletionMessageParam[] }): AsyncIterableIterator<any>;
+  invoke(input: { messages: ChatCompletionMessageParam[]; [key: string]: any }): Promise<AgentState>;
+  stream(input: { messages: ChatCompletionMessageParam[]; [key: string]: any }): AsyncIterableIterator<any>;
 }
 
 /**
