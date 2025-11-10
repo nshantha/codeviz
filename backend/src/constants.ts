@@ -41,7 +41,11 @@ export const LEARNING_CONSTANTS = {
 };
 
 // Misconception patterns by pattern name
-export const MISCONCEPTION_PATTERNS = {
+export const MISCONCEPTION_PATTERNS: Record<string, Array<{
+  pattern: RegExp;
+  misconception: string;
+  correction: string;
+}>> = {
   'Two Pointers': [
     {
       pattern: /two.*pointer.*always.*sorted/i,

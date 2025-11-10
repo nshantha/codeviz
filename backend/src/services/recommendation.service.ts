@@ -33,7 +33,7 @@ export class RecommendationService extends BaseService {
       if (!targetPatternId) return null;
 
       // Find appropriate problem for the pattern
-      const problem = await this.findProblemForPattern(userId, targetPatternId, context);
+      const problem = await this.findProblemForPattern(userId, targetPatternId, context) as any;
 
       if (!problem) return null;
 
@@ -120,7 +120,7 @@ export class RecommendationService extends BaseService {
         : strategy.focusPattern;
 
       if (patternId) {
-        const problem = await this.findProblemForPattern(userId, patternId, context);
+        const problem = await this.findProblemForPattern(userId, patternId, context) as any;
         if (problem) {
           const time = this.estimateSolveTime(problem.difficulty, context.currentMastery);
           problems.push({
@@ -268,7 +268,7 @@ export class RecommendationService extends BaseService {
     userId: string,
     patternId: string,
     context: AdaptiveContext
-  ) {
+  ): Promise<{ id: any; title: any; slug: any; difficulty: any } | null> {
     // Get knowledge for this specific pattern
     const { data: knowledge } = await this.db
       .from('knowledge_state')
@@ -304,12 +304,12 @@ export class RecommendationService extends BaseService {
         .eq('pattern_id', patternId)
         .limit(1);
 
-      return anyProblems && anyProblems[0] ? anyProblems[0].problems : null;
+      return anyProblems && anyProblems[0] ? (anyProblems[0] as any).problems : null;
     }
 
     // TODO: Filter out already solved problems
     const problem = problems[Math.floor(Math.random() * problems.length)];
-    return problem.problems;
+    return (problem as any).problems;
   }
 
   /**

@@ -211,7 +211,7 @@ Research shows: Retrieval practice (testing) is more effective than re-studying!
           required: ['framework'],
         },
         execute: async (args, state: AgentState) => {
-          const framework = PROBLEM_SOLVING_FRAMEWORKS[args.framework];
+          const framework = (PROBLEM_SOLVING_FRAMEWORKS as any)[args.framework];
 
           return {
             success: true,

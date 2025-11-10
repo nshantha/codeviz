@@ -9,9 +9,8 @@ import { ChatCompletionMessageParam, ChatCompletionTool } from 'openai/resources
  * Agent State - message history and shared context
  * Equivalent to Python's AgentState TypedDict
  */
-export interface AgentState {
+export interface AgentState extends Record<string, any> {
   messages: ChatCompletionMessageParam[];
-  [key: string]: any; // Allow middleware to extend state
 }
 
 /**
