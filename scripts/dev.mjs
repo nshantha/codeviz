@@ -1,10 +1,29 @@
 // Dev orchestrator: starts Vite, waits for it, then launches Electron
 // against the dev server. Also watches main/preload with tsc.
-import { spawn } from "node:child_process";
+import { spawn, execSync } from "node:child_process";
 import net from "node:net";
 
 const VITE_PORT = 5173;
 const ROOT = new URL("..", import.meta.url).pathname;
+
+// The tsc --watch steps above only compile TS; they do not copy static data.
+// Make sure catalog.json exists in dist before Electron boots.
+try {
+  execSync("npm run -s build:data", { cwd: ROOT, stdio: "inherit" });
+} catch (e) {
+  console.error("[dev] build:data failed:", e.message);
+  process.exit(1);
+}
+
+// One-off compile of main + preload so dist/main/index.js exists before
+// Electron launches (the watchers below may not have finished compiling yet).
+try {
+  execSync("npx tsc -p tsconfig.main.json", { cwd: ROOT, stdio: "inherit" });
+  execSync("npx tsc -p tsconfig.preload.json", { cwd: ROOT, stdio: "inherit" });
+} catch (e) {
+  console.error("[dev] initial main/preload compile failed:", e.message);
+  process.exit(1);
+}
 
 function waitForPort(port, timeoutMs = 30000) {
   return new Promise((resolve, reject) => {

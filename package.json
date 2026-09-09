@@ -5,7 +5,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
-  "description": "AlgoMentor \u2014 local-first interview prep desktop app (Electron + React + SQLite)",
+  "description": "AlgoMentor — local-first interview prep desktop app (Electron + React + SQLite)",
   "devDependencies": {
     "@electron/rebuild": "^4.2.0",
     "@types/better-sqlite3": "^7.6.12",
@@ -31,8 +31,27 @@
     "seed:catalog": "node scripts/gen-catalog-seed.mjs",
     "test": "node --test dist-test/ 2>/dev/null || echo 'no tests yet'",
     "typecheck": "tsc -p tsconfig.main.json --noEmit && tsc -p tsconfig.preload.json --noEmit && tsc -p tsconfig.renderer.json --noEmit",
-    "build:data": "mkdir -p dist/main/data && cp src/main/data/catalog.json dist/main/data/catalog.json",
+    "build:data": "mkdir -p dist/main/data dist/assets && cp src/main/data/catalog.json dist/main/data/catalog.json && cp assets/icon.png dist/assets/icon.png",
     "postinstall": "electron-rebuild -w better-sqlite3"
   },
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "build": {
+    "appId": "com.algomentor.app",
+    "productName": "AlgoMentor",
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.education"
+    },
+    "win": {
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "category": "Education"
+    }
+  }
 }

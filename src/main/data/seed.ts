@@ -16,12 +16,15 @@ function catalogPath(): string {
   const candidates = [
     path.join(__dirname, "catalog.json"), // dist/main/data/catalog.json (built)
     path.join(__dirname, "data", "catalog.json"),
-    path.join(__dirname, "..", "..", "src", "main", "data", "catalog.json"),
+    // dev fallback: dist/main/data -> repo root -> src/main/data/catalog.json
+    path.join(__dirname, "..", "..", "..", "src", "main", "data", "catalog.json"),
   ];
   for (const c of candidates) {
     if (fs.existsSync(c)) return c;
   }
-  throw new Error("catalog.json not found");
+  throw new Error(
+    "catalog.json not found. Run `npm run build:data` (or `npm run build`) to copy it into dist.",
+  );
 }
 
 /** Seed the question catalog on first run. Idempotent. */

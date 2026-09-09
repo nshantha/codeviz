@@ -13,6 +13,7 @@ function createWindow(): void {
     minWidth: 1024,
     minHeight: 700,
     title: "AlgoMentor",
+    icon: path.join(__dirname, "..", "..", "assets", "icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "..", "preload", "index.js"),
       contextIsolation: true,
@@ -39,9 +40,16 @@ function createWindow(): void {
 
 async function init(): Promise<void> {
   openDatabase();
-  const seed = seedCatalog();
-  // eslint-disable-next-line no-console
-  console.log(`[main] catalog: ${seed.seeded ? "seeded" : "already present"} (${seed.count} questions)`);
+  try {
+    const seed = seedCatalog();
+    // eslint-disable-next-line no-console
+    console.log(`[main] catalog: ${seed.seeded ? "seeded" : "already present"} (${seed.count} questions)`);
+  } catch (err) {
+    // A missing catalog must never prevent the app from opening or produce
+    // an unhandled rejection. The practice views will show an empty bank.
+    // eslint-disable-next-line no-console
+    console.error("[main] catalog seed failed:", (err as Error).message);
+  }
   registerIpc();
 }
 
