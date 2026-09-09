@@ -1,0 +1,4168 @@
+{
+ "meta": {
+  "generated": "2026-09-09",
+  "source": "faang-question-tendencies-20260908"
+ },
+ "patterns": [
+  "Two Pointers",
+  "Sliding Window",
+  "Hash Maps",
+  "Prefix Sum",
+  "Binary Search",
+  "Stack / Monotonic Stack",
+  "Linked List",
+  "Merge Intervals",
+  "Tree BFS",
+  "Tree DFS",
+  "Graphs",
+  "Heap / Top-K",
+  "Tries",
+  "Backtracking",
+  "Dynamic Programming",
+  "Greedy",
+  "Bit Manipulation",
+  "Math & Geometry",
+  "Arrays"
+ ],
+ "questions": [
+  {
+   "leetcode_id": 1,
+   "title": "Two Sum",
+   "difficulty": "Easy",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/two-sum/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 2,
+   "title": "Add Two Numbers",
+   "difficulty": "Medium",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/add-two-numbers/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 3,
+   "title": "Longest Substring Without Repeating Characters",
+   "difficulty": "Medium",
+   "pattern": "Sliding Window",
+   "leetcode_url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 4,
+   "title": "Median of Two Sorted Arrays",
+   "difficulty": "Hard",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 5,
+   "title": "Longest Palindromic Substring",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/longest-palindromic-substring/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 9,
+   "title": "Palindrome Number",
+   "difficulty": "Easy",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/palindrome-number/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 10,
+   "title": "Regular Expression Matching",
+   "difficulty": "Hard",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/regular-expression-matching/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 11,
+   "title": "Container With Most Water",
+   "difficulty": "Medium",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/container-with-most-water/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 12,
+   "title": "Integer to Roman",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/integer-to-roman/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 14,
+   "title": "Longest Common Prefix",
+   "difficulty": "Easy",
+   "pattern": "Tries",
+   "leetcode_url": "https://leetcode.com/problems/longest-common-prefix/",
+   "companies": [
+    {
+     "company": "netflix",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 15,
+   "title": "3Sum",
+   "difficulty": "Medium",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/3sum/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 17,
+   "title": "Letter Combinations of a Phone Number",
+   "difficulty": "Medium",
+   "pattern": "Backtracking",
+   "leetcode_url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 19,
+   "title": "Remove Nth Node From End of List",
+   "difficulty": "Medium",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 20,
+   "title": "Valid Parentheses",
+   "difficulty": "Easy",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/valid-parentheses/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 21,
+   "title": "Merge Two Sorted Lists",
+   "difficulty": "Easy",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 22,
+   "title": "Generate Parentheses",
+   "difficulty": "Medium",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/generate-parentheses/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 23,
+   "title": "Merge k Sorted Lists",
+   "difficulty": "Hard",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/merge-k-sorted-lists/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 31,
+   "title": "Next Permutation",
+   "difficulty": "Medium",
+   "pattern": "Arrays",
+   "leetcode_url": "https://leetcode.com/problems/next-permutation/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 33,
+   "title": "Search in Rotated Sorted Array",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 34,
+   "title": "Find First and Last Position of Element in Sorted Array",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 36,
+   "title": "Valid Sudoku",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/valid-sudoku/",
+   "companies": [
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 39,
+   "title": "Combination Sum",
+   "difficulty": "Medium",
+   "pattern": "Backtracking",
+   "leetcode_url": "https://leetcode.com/problems/combination-sum/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 41,
+   "title": "First Missing Positive",
+   "difficulty": "Hard",
+   "pattern": "Arrays",
+   "leetcode_url": "https://leetcode.com/problems/first-missing-positive/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 42,
+   "title": "Trapping Rain Water",
+   "difficulty": "Hard",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/trapping-rain-water/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 45,
+   "title": "Jump Game II",
+   "difficulty": "Medium",
+   "pattern": "Greedy",
+   "leetcode_url": "https://leetcode.com/problems/jump-game-ii/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 46,
+   "title": "Permutations",
+   "difficulty": "Medium",
+   "pattern": "Backtracking",
+   "leetcode_url": "https://leetcode.com/problems/permutations/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 48,
+   "title": "Rotate Image",
+   "difficulty": "Medium",
+   "pattern": "Math & Geometry",
+   "leetcode_url": "https://leetcode.com/problems/rotate-image/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 49,
+   "title": "Group Anagrams",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/group-anagrams/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 51,
+   "title": "N-Queens",
+   "difficulty": "Hard",
+   "pattern": "Backtracking",
+   "leetcode_url": "https://leetcode.com/problems/n-queens/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 53,
+   "title": "Maximum Subarray",
+   "difficulty": "Medium",
+   "pattern": "Greedy",
+   "leetcode_url": "https://leetcode.com/problems/maximum-subarray/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 54,
+   "title": "Spiral Matrix",
+   "difficulty": "Medium",
+   "pattern": "Math & Geometry",
+   "leetcode_url": "https://leetcode.com/problems/spiral-matrix/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 55,
+   "title": "Jump Game",
+   "difficulty": "Medium",
+   "pattern": "Greedy",
+   "leetcode_url": "https://leetcode.com/problems/jump-game/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 56,
+   "title": "Merge Intervals",
+   "difficulty": "Medium",
+   "pattern": "Merge Intervals",
+   "leetcode_url": "https://leetcode.com/problems/merge-intervals/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 57,
+   "title": "Insert Interval",
+   "difficulty": "Medium",
+   "pattern": "Merge Intervals",
+   "leetcode_url": "https://leetcode.com/problems/insert-interval/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 62,
+   "title": "Unique Paths",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/unique-paths/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 69,
+   "title": "Sqrt(x)",
+   "difficulty": "Easy",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/sqrtx/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 70,
+   "title": "Climbing Stairs",
+   "difficulty": "Easy",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/climbing-stairs/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 72,
+   "title": "Edit Distance",
+   "difficulty": "Hard",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/edit-distance/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 74,
+   "title": "Search a 2D Matrix",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/search-a-2d-matrix/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 75,
+   "title": "Sort Colors",
+   "difficulty": "Medium",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/sort-colors/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 76,
+   "title": "Minimum Window Substring",
+   "difficulty": "Hard",
+   "pattern": "Sliding Window",
+   "leetcode_url": "https://leetcode.com/problems/minimum-window-substring/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 78,
+   "title": "Subsets",
+   "difficulty": "Medium",
+   "pattern": "Backtracking",
+   "leetcode_url": "https://leetcode.com/problems/subsets/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 79,
+   "title": "Word Search",
+   "difficulty": "Medium",
+   "pattern": "Backtracking",
+   "leetcode_url": "https://leetcode.com/problems/word-search/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 84,
+   "title": "Largest Rectangle in Histogram",
+   "difficulty": "Hard",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 88,
+   "title": "Merge Sorted Array",
+   "difficulty": "Easy",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/merge-sorted-array/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 91,
+   "title": "Decode Ways",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/decode-ways/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 97,
+   "title": "Interleaving String",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/interleaving-string/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 98,
+   "title": "Validate Binary Search Tree",
+   "difficulty": "Medium",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/validate-binary-search-tree/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 102,
+   "title": "Binary Tree Level Order Traversal",
+   "difficulty": "Medium",
+   "pattern": "Tree BFS",
+   "leetcode_url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 103,
+   "title": "Binary Tree Zigzag Level Order Traversal",
+   "difficulty": "Medium",
+   "pattern": "Tree BFS",
+   "leetcode_url": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 104,
+   "title": "Maximum Depth of Binary Tree",
+   "difficulty": "Easy",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 105,
+   "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+   "difficulty": "Medium",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 109,
+   "title": "Convert Sorted List to Binary Search Tree",
+   "difficulty": "Medium",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 115,
+   "title": "Distinct Subsequences",
+   "difficulty": "Hard",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/distinct-subsequences/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 121,
+   "title": "Best Time to Buy and Sell Stock",
+   "difficulty": "Easy",
+   "pattern": "Sliding Window",
+   "leetcode_url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 124,
+   "title": "Binary Tree Maximum Path Sum",
+   "difficulty": "Hard",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 125,
+   "title": "Valid Palindrome",
+   "difficulty": "Easy",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/valid-palindrome/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 126,
+   "title": "Word Ladder II",
+   "difficulty": "Hard",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/word-ladder-ii/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 127,
+   "title": "Word Ladder",
+   "difficulty": "Hard",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/word-ladder/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 128,
+   "title": "Longest Consecutive Sequence",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/longest-consecutive-sequence/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 130,
+   "title": "Surrounded Regions",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/surrounded-regions/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 131,
+   "title": "Palindrome Partitioning",
+   "difficulty": "Medium",
+   "pattern": "Backtracking",
+   "leetcode_url": "https://leetcode.com/problems/palindrome-partitioning/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 133,
+   "title": "Clone Graph",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/clone-graph/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 136,
+   "title": "Single Number",
+   "difficulty": "Easy",
+   "pattern": "Bit Manipulation",
+   "leetcode_url": "https://leetcode.com/problems/single-number/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 138,
+   "title": "Copy List with Random Pointer",
+   "difficulty": "Medium",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/copy-list-with-random-pointer/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 139,
+   "title": "Word Break",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/word-break/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 140,
+   "title": "Word Break II",
+   "difficulty": "Hard",
+   "pattern": "Backtracking",
+   "leetcode_url": "https://leetcode.com/problems/word-break-ii/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 141,
+   "title": "Linked List Cycle",
+   "difficulty": "Easy",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/linked-list-cycle/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 143,
+   "title": "Reorder List",
+   "difficulty": "Medium",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/reorder-list/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 146,
+   "title": "LRU Cache",
+   "difficulty": "Medium",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/lru-cache/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 150,
+   "title": "Evaluate Reverse Polish Notation",
+   "difficulty": "Medium",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 152,
+   "title": "Maximum Product Subarray",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/maximum-product-subarray/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 153,
+   "title": "Find Minimum in Rotated Sorted Array",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 155,
+   "title": "Min Stack",
+   "difficulty": "Medium",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/min-stack/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 157,
+   "title": "Read N Characters Given Read4",
+   "difficulty": "Easy",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/read-n-characters-given-read4/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 158,
+   "title": "Read N Characters Given Read4 II - Call Multiple Times",
+   "difficulty": "Hard",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/read-n-characters-given-read4-ii---call-multiple-times/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 161,
+   "title": "One Edit Distance",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/one-edit-distance/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 162,
+   "title": "Find Peak Element",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/find-peak-element/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 165,
+   "title": "Compare Version Numbers",
+   "difficulty": "Medium",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/compare-version-numbers/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 167,
+   "title": "Two Sum II - Input Array Is Sorted",
+   "difficulty": "Medium",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/two-sum-ii---input-array-is-sorted/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 185,
+   "title": "Department Top Three Salaries",
+   "difficulty": "Hard",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/department-top-three-salaries/",
+   "companies": [
+    {
+     "company": "netflix",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 198,
+   "title": "House Robber",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/house-robber/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 199,
+   "title": "Binary Tree Right Side View",
+   "difficulty": "Medium",
+   "pattern": "Tree BFS",
+   "leetcode_url": "https://leetcode.com/problems/binary-tree-right-side-view/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 200,
+   "title": "Number of Islands",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/number-of-islands/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 206,
+   "title": "Reverse Linked List",
+   "difficulty": "Easy",
+   "pattern": "Linked List",
+   "leetcode_url": "https://leetcode.com/problems/reverse-linked-list/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 207,
+   "title": "Course Schedule",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/course-schedule/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 210,
+   "title": "Course Schedule II",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/course-schedule-ii/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 211,
+   "title": "Design Add and Search Words Data Structure",
+   "difficulty": "Medium",
+   "pattern": "Tries",
+   "leetcode_url": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 212,
+   "title": "Word Search II",
+   "difficulty": "Hard",
+   "pattern": "Tries",
+   "leetcode_url": "https://leetcode.com/problems/word-search-ii/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 213,
+   "title": "House Robber II",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/house-robber-ii/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 215,
+   "title": "Kth Largest Element in an Array",
+   "difficulty": "Medium",
+   "pattern": "Heap / Top-K",
+   "leetcode_url": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 224,
+   "title": "Basic Calculator",
+   "difficulty": "Hard",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/basic-calculator/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 227,
+   "title": "Basic Calculator II",
+   "difficulty": "Medium",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/basic-calculator-ii/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 230,
+   "title": "Kth Smallest Element in a BST",
+   "difficulty": "Medium",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 236,
+   "title": "Lowest Common Ancestor of a Binary Tree",
+   "difficulty": "Medium",
+   "pattern": "Arrays",
+   "leetcode_url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 238,
+   "title": "Product of Array Except Self",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/product-of-array-except-self/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 239,
+   "title": "Sliding Window Maximum",
+   "difficulty": "Hard",
+   "pattern": "Sliding Window",
+   "leetcode_url": "https://leetcode.com/problems/sliding-window-maximum/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 240,
+   "title": "Search a 2D Matrix II",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/search-a-2d-matrix-ii/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 242,
+   "title": "Valid Anagram",
+   "difficulty": "Easy",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/valid-anagram/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 252,
+   "title": "Meeting Rooms",
+   "difficulty": "Easy",
+   "pattern": "Merge Intervals",
+   "leetcode_url": "https://leetcode.com/problems/meeting-rooms/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 253,
+   "title": "Meeting Rooms II",
+   "difficulty": "Medium",
+   "pattern": "Merge Intervals",
+   "leetcode_url": "https://leetcode.com/problems/meeting-rooms-ii/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 269,
+   "title": "Alien Dictionary",
+   "difficulty": "Hard",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/alien-dictionary/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 271,
+   "title": "Encode and Decode Strings",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/encode-and-decode-strings/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 277,
+   "title": "Find the Celebrity",
+   "difficulty": "Medium",
+   "pattern": "Arrays",
+   "leetcode_url": "https://leetcode.com/problems/find-the-celebrity/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 286,
+   "title": "Walls And Gates",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/walls-and-gates/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 295,
+   "title": "Find Median from Data Stream",
+   "difficulty": "Hard",
+   "pattern": "Heap / Top-K",
+   "leetcode_url": "https://leetcode.com/problems/find-median-from-data-stream/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 297,
+   "title": "Serialize and Deserialize Binary Tree",
+   "difficulty": "Hard",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 300,
+   "title": "Longest Increasing Subsequence",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/longest-increasing-subsequence/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 314,
+   "title": "Binary Tree Vertical Order Traversal",
+   "difficulty": "Medium",
+   "pattern": "Tree BFS",
+   "leetcode_url": "https://leetcode.com/problems/binary-tree-vertical-order-traversal/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 322,
+   "title": "Coin Change",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/coin-change/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 325,
+   "title": "Maximum Size Subarray Sum Equals k",
+   "difficulty": "Medium",
+   "pattern": "Prefix Sum",
+   "leetcode_url": "https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 332,
+   "title": "Reconstruct Itinerary",
+   "difficulty": "Hard",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/reconstruct-itinerary/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 339,
+   "title": "Nested List Weight Sum",
+   "difficulty": "Easy",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/nested-list-weight-sum/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 347,
+   "title": "Top K Frequent Elements",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/top-k-frequent-elements/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "core"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 348,
+   "title": "Design Tic-Tac-Toe",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/design-tic-tac-toe/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 359,
+   "title": "Logger Rate Limiter",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/logger-rate-limiter/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    },
+    {
+     "company": "netflix",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 362,
+   "title": "Design Hit Counter",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/design-hit-counter/",
+   "companies": [
+    {
+     "company": "netflix",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 380,
+   "title": "Insert Delete GetRandom O(1)",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/insert-delete-getrandom-o1/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 394,
+   "title": "Decode String",
+   "difficulty": "Medium",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/decode-string/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 410,
+   "title": "Split Array Largest Sum",
+   "difficulty": "Hard",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/split-array-largest-sum/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 416,
+   "title": "Partition Equal Subset Sum",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/partition-equal-subset-sum/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 417,
+   "title": "Pacific Atlantic Water Flow",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 424,
+   "title": "Longest Repeating Character Replacement",
+   "difficulty": "Medium",
+   "pattern": "Sliding Window",
+   "leetcode_url": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 426,
+   "title": "Convert Binary Search Tree to Sorted Doubly Linked List",
+   "difficulty": "Medium",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 435,
+   "title": "Non-overlapping Intervals",
+   "difficulty": "Medium",
+   "pattern": "Merge Intervals",
+   "leetcode_url": "https://leetcode.com/problems/non-overlapping-intervals/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 472,
+   "title": "Concatenated Words",
+   "difficulty": "Hard",
+   "pattern": "Two Pointers",
+   "leetcode_url": "https://leetcode.com/problems/concatenated-words/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 494,
+   "title": "Target Sum",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/target-sum/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 498,
+   "title": "Diagonal Traverse",
+   "difficulty": "Medium",
+   "pattern": "Arrays",
+   "leetcode_url": "https://leetcode.com/problems/diagonal-traverse/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 518,
+   "title": "Coin Change II",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/coin-change-ii/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 528,
+   "title": "Random Pick with Weight",
+   "difficulty": "Medium",
+   "pattern": "Prefix Sum",
+   "leetcode_url": "https://leetcode.com/problems/random-pick-with-weight/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 543,
+   "title": "Diameter of Binary Tree",
+   "difficulty": "Easy",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/diameter-of-binary-tree/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 560,
+   "title": "Subarray Sum Equals K",
+   "difficulty": "Medium",
+   "pattern": "Prefix Sum",
+   "leetcode_url": "https://leetcode.com/problems/subarray-sum-equals-k/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    },
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 567,
+   "title": "Permutation in String",
+   "difficulty": "Medium",
+   "pattern": "Sliding Window",
+   "leetcode_url": "https://leetcode.com/problems/permutation-in-string/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 572,
+   "title": "Subtree of Another Tree",
+   "difficulty": "Easy",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/subtree-of-another-tree/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 588,
+   "title": "Design In-Memory File System",
+   "difficulty": "Hard",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/design-in-memory-file-system/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 616,
+   "title": "Add Bold Tag in String",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/add-bold-tag-in-string/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 621,
+   "title": "Task Scheduler",
+   "difficulty": "Medium",
+   "pattern": "Heap / Top-K",
+   "leetcode_url": "https://leetcode.com/problems/task-scheduler/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 642,
+   "title": "Design Search Autocomplete System",
+   "difficulty": "Hard",
+   "pattern": "Heap / Top-K",
+   "leetcode_url": "https://leetcode.com/problems/design-search-autocomplete-system/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 658,
+   "title": "Find K Closest Elements",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/find-k-closest-elements/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 675,
+   "title": "Cut Off Trees for Golf Event",
+   "difficulty": "Hard",
+   "pattern": "Heap / Top-K",
+   "leetcode_url": "https://leetcode.com/problems/cut-off-trees-for-golf-event/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 695,
+   "title": "Max Area of Island",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/max-area-of-island/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 703,
+   "title": "Kth Largest Element in a Stream",
+   "difficulty": "Easy",
+   "pattern": "Heap / Top-K",
+   "leetcode_url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 704,
+   "title": "Binary Search",
+   "difficulty": "Easy",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/binary-search/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 737,
+   "title": "Sentence Similarity II",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/sentence-similarity-ii/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 739,
+   "title": "Daily Temperatures",
+   "difficulty": "Medium",
+   "pattern": "Stack / Monotonic Stack",
+   "leetcode_url": "https://leetcode.com/problems/daily-temperatures/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "breadth"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 746,
+   "title": "Min Cost Climbing Stairs",
+   "difficulty": "Easy",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/min-cost-climbing-stairs/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 763,
+   "title": "Partition Labels",
+   "difficulty": "Medium",
+   "pattern": "Greedy",
+   "leetcode_url": "https://leetcode.com/problems/partition-labels/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 766,
+   "title": "Toeplitz Matrix",
+   "difficulty": "Easy",
+   "pattern": "Arrays",
+   "leetcode_url": "https://leetcode.com/problems/toeplitz-matrix/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 767,
+   "title": "Reorganize String",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/reorganize-string/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 815,
+   "title": "Bus Routes",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/bus-routes/",
+   "companies": [
+    {
+     "company": "apple",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 819,
+   "title": "Most Common Word",
+   "difficulty": "Easy",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/most-common-word/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 825,
+   "title": "Friends Of Appropriate Ages",
+   "difficulty": "Medium",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/friends-of-appropriate-ages/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 863,
+   "title": "All Nodes Distance K in Binary Tree",
+   "difficulty": "Medium",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 875,
+   "title": "Koko Eating Bananas",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/koko-eating-bananas/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 937,
+   "title": "Reorder Data in Log Files",
+   "difficulty": "Easy",
+   "pattern": "Hash Maps",
+   "leetcode_url": "https://leetcode.com/problems/reorder-data-in-log-files/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 938,
+   "title": "Range Sum of BST",
+   "difficulty": "Easy",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/range-sum-of-bst/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 957,
+   "title": "Prison Cells After N Days",
+   "difficulty": "Medium",
+   "pattern": "Arrays",
+   "leetcode_url": "https://leetcode.com/problems/prison-cells-after-n-days/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 958,
+   "title": "Check Completeness of a Binary Tree",
+   "difficulty": "Medium",
+   "pattern": "Tree BFS",
+   "leetcode_url": "https://leetcode.com/problems/check-completeness-of-a-binary-tree/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 973,
+   "title": "K Closest Points to Origin",
+   "difficulty": "Medium",
+   "pattern": "Heap / Top-K",
+   "leetcode_url": "https://leetcode.com/problems/k-closest-points-to-origin/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 981,
+   "title": "Time Based Key-Value Store",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/time-based-key-value-store/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "core"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 987,
+   "title": "Vertical Order Traversal of a Binary Tree",
+   "difficulty": "Medium",
+   "pattern": "Tree BFS",
+   "leetcode_url": "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 994,
+   "title": "Rotting Oranges",
+   "difficulty": "Medium",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/rotting-oranges/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "breadth"
+    },
+    {
+     "company": "amazon",
+     "section": "core"
+    },
+    {
+     "company": "google",
+     "section": "breadth"
+    },
+    {
+     "company": "apple",
+     "section": "breadth"
+    },
+    {
+     "company": "netflix",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 1046,
+   "title": "Last Stone Weight",
+   "difficulty": "Easy",
+   "pattern": "Heap / Top-K",
+   "leetcode_url": "https://leetcode.com/problems/last-stone-weight/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 1060,
+   "title": "Missing Element in Sorted Array",
+   "difficulty": "Medium",
+   "pattern": "Prefix Sum",
+   "leetcode_url": "https://leetcode.com/problems/missing-element-in-sorted-array/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 1143,
+   "title": "Longest Common Subsequence",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/longest-common-subsequence/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 1192,
+   "title": "Critical Connections in a Network",
+   "difficulty": "Hard",
+   "pattern": "Graphs",
+   "leetcode_url": "https://leetcode.com/problems/critical-connections-in-a-network/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 1235,
+   "title": "Maximum Profit in Job Scheduling",
+   "difficulty": "Medium",
+   "pattern": "Dynamic Programming",
+   "leetcode_url": "https://leetcode.com/problems/maximum-profit-in-job-scheduling/",
+   "companies": [
+    {
+     "company": "apple",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 1428,
+   "title": "Leftmost Column with at Least a One",
+   "difficulty": "Medium",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/leftmost-column-with-at-least-a-one/",
+   "companies": [
+    {
+     "company": "meta",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 1448,
+   "title": "Count Good Nodes in Binary Tree",
+   "difficulty": "Medium",
+   "pattern": "Tree DFS",
+   "leetcode_url": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/",
+   "companies": [
+    {
+     "company": "amazon",
+     "section": "breadth"
+    }
+   ],
+   "neetcode150": true
+  },
+  {
+   "leetcode_id": 1861,
+   "title": "Rotating the Box",
+   "difficulty": "Medium",
+   "pattern": "Arrays",
+   "leetcode_url": "https://leetcode.com/problems/rotating-the-box/",
+   "companies": [
+    {
+     "company": "netflix",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  },
+  {
+   "leetcode_id": 2064,
+   "title": "Minimized Maximum of Products Distributed to Any Store",
+   "difficulty": "Medium",
+   "pattern": "Binary Search",
+   "leetcode_url": "https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/",
+   "companies": [
+    {
+     "company": "google",
+     "section": "gaps"
+    }
+   ],
+   "neetcode150": false
+  }
+ ],
+ "banks": {
+  "meta": {
+   "core": [
+    621,
+    200,
+    143,
+    42,
+    76,
+    236,
+    286,
+    121,
+    133,
+    973,
+    215,
+    347,
+    253,
+    33,
+    153,
+    981,
+    4,
+    23,
+    295,
+    15,
+    56,
+    238,
+    125,
+    211,
+    297,
+    91,
+    72,
+    84,
+    10,
+    17,
+    55
+   ],
+   "gaps": [
+    314,
+    987,
+    426,
+    560,
+    325,
+    958,
+    767,
+    157,
+    158,
+    616,
+    1060,
+    277,
+    528,
+    380,
+    161,
+    339,
+    863,
+    109,
+    658,
+    938,
+    825,
+    1428,
+    498,
+    766
+   ],
+   "breadth": [
+    102,
+    104,
+    230,
+    105,
+    124,
+    994,
+    417,
+    210,
+    21,
+    19,
+    141,
+    2,
+    242,
+    128,
+    271,
+    704,
+    74,
+    424,
+    567,
+    167,
+    739,
+    150,
+    57,
+    435,
+    703
+   ]
+  },
+  "amazon": {
+   "core": [
+    973,
+    5,
+    1,
+    200,
+    146,
+    138,
+    21,
+    295,
+    42,
+    297,
+    23,
+    763,
+    20,
+    2,
+    127,
+    48,
+    236,
+    121,
+    3,
+    4,
+    155,
+    239,
+    212,
+    139,
+    269,
+    238,
+    33,
+    253,
+    347,
+    15,
+    56,
+    206,
+    695,
+    199,
+    207,
+    22,
+    543,
+    152,
+    130,
+    91,
+    49,
+    53,
+    76,
+    79,
+    84,
+    98,
+    102,
+    215,
+    227,
+    300,
+    322,
+    994
+   ],
+   "gaps": [
+    937,
+    1192,
+    819,
+    957,
+    642,
+    240,
+    588,
+    572,
+    472,
+    140,
+    126,
+    675,
+    165,
+    12,
+    348,
+    737,
+    394,
+    103
+   ],
+   "breadth": [
+    133,
+    417,
+    210,
+    332,
+    230,
+    105,
+    124,
+    1448,
+    621,
+    1046,
+    57,
+    435,
+    252,
+    19,
+    141,
+    143,
+    567,
+    739,
+    70,
+    198
+   ]
+  },
+  "google": {
+   "core": [
+    1,
+    3,
+    2,
+    4,
+    56,
+    70,
+    200,
+    53,
+    207,
+    20,
+    22,
+    42,
+    51,
+    121,
+    146,
+    295,
+    21,
+    141,
+    875,
+    236,
+    300,
+    5,
+    15,
+    19,
+    23,
+    45,
+    54,
+    11,
+    55,
+    62,
+    75,
+    136,
+    424,
+    17,
+    46,
+    48,
+    739,
+    127,
+    347,
+    139,
+    981
+   ],
+   "gaps": [
+    560,
+    88,
+    162,
+    359,
+    410,
+    224,
+    69,
+    34,
+    41,
+    2064,
+    9,
+    31
+   ],
+   "breadth": [
+    746,
+    198,
+    213,
+    322,
+    152,
+    416,
+    1143,
+    72,
+    494,
+    518,
+    115,
+    97,
+    133,
+    994,
+    417,
+    130,
+    210,
+    269,
+    102,
+    104,
+    230,
+    105,
+    124,
+    704,
+    74,
+    33,
+    153,
+    78,
+    39,
+    79,
+    131,
+    271
+   ]
+  },
+  "apple": {
+   "core": [
+    1,
+    146,
+    200,
+    206,
+    49,
+    20,
+    56,
+    139,
+    238,
+    121,
+    15,
+    42,
+    347,
+    207,
+    236,
+    297,
+    3,
+    4,
+    23
+   ],
+   "gaps": [
+    1235,
+    815
+   ],
+   "breadth": [
+    242,
+    271,
+    128,
+    36,
+    125,
+    167,
+    11,
+    424,
+    567,
+    76,
+    739,
+    150,
+    22,
+    21,
+    19,
+    141,
+    2,
+    138,
+    102,
+    104,
+    230,
+    105,
+    543,
+    199,
+    133,
+    994,
+    417,
+    973,
+    215,
+    57,
+    253,
+    704,
+    153,
+    33,
+    70,
+    198,
+    322,
+    78,
+    46
+   ]
+  },
+  "netflix": {
+   "core": [
+    53,
+    3,
+    5,
+    42,
+    121,
+    1,
+    11,
+    238,
+    23,
+    146,
+    20,
+    155,
+    212,
+    332,
+    46,
+    15,
+    295,
+    200,
+    207,
+    133,
+    56,
+    297,
+    49,
+    269,
+    253,
+    91,
+    973,
+    416
+   ],
+   "gaps": [
+    359,
+    1861,
+    362,
+    14,
+    185
+   ],
+   "breadth": [
+    242,
+    128,
+    125,
+    167,
+    424,
+    567,
+    76,
+    739,
+    150,
+    21,
+    19,
+    141,
+    2,
+    138,
+    102,
+    104,
+    230,
+    105,
+    994,
+    417,
+    210,
+    347
+   ]
+  }
+ },
+ "system_design": {
+  "meta": {
+   "grading": [
+    "**Grading:** Fan-out strategy under time pressure; failure modes, retries, blast radius; scale math (RPS \u00d7 bytes); time-efficient sketching \u2014 this is where candidates run out of time. Recent reports: FB Post Search (text search over a massive corpus)."
+   ],
+   "prompts": [
+    "**Prompts:** News feed fan-out + the **celebrity problem** (signature \u2014 scale a post seen by millions, separate hot/cold paths); **Ad Click Aggregator** (real-time ad clicks \u2192 billing); **Online Game Leaderboard** (real-time top-K, write-heavy); **Ticket Booking System** (atomicity under contention); **Top-K System** (heavy hitters); Product-Architecture: **Spotify Top-K Songs widget**, **Price Drop Tracker** (event-driven), **Instagram Auction**."
+   ],
+   "caveats": []
+  },
+  "amazon": {
+   "grading": [
+    "**Grading:** Write-ups expected to map design decisions to **Leadership Principles** (Ownership, Dive Deep); failure scenarios and multi-region consistency; extensibility over pure scale; separate **LLD/OOD** round (Amazon Locker, Logger System, parking lot, elevator, library checkout, purchase-order filters, arithmetic expression tree) graded on SOLID/extensibility."
+   ],
+   "prompts": [
+    "**Prompts:** CDN for media at scale; global file storage; distributed DB with global reach + regional failover; **Prime Day flash-sale traffic spikes** (burst absorption, queueing); parking/payment systems, warehouse robotics/fleet mgmt; Prime Video, WhatsApp, Twitter, Uber."
+   ],
+   "caveats": [
+    "**Caveat:** Strongest signal at L4/L5; SDE III (L6) system-design depth under-represented in public data."
+   ]
+  },
+  "google": {
+   "grading": [
+    "**Grading:** Trade-off reasoning; scaling math under explicit growth assumptions; operational concerns (monitoring, rollout, rollback); the twist format from coding extends here \u2014 expect constraint changes mid-round. Hiring-committee packet matters: clear articulation beats cleverness."
+   ],
+   "prompts": [
+    "**Prompts:** Google Search; YouTube (upload/serve at scale); Google Docs (collaborative editing); Google Maps (traffic/routing); Gmail, Drive, Chat, Photos, Meet; URL shortener; **web crawler**; news feed; distributed cache; rate limiter; notification system; distributed task scheduler; recommendation system; Ads auction."
+   ],
+   "caveats": []
+  },
+  "apple": {
+   "grading": [
+    "**Grading:** OOD/LLD is the senior separator \u2014 modular APIs, extensibility, SOLID; **privacy as a first-class design constraint** (encryption, data minimization, on-device processing); operational excellence (how it breaks at 3am); candidate questions probe *why* Apple (which product inspires you)."
+   ],
+   "prompts": [
+    "**Prompts:** Distributed **multi-vendor rate limiter** (candidate-reported); **iCloud-scale file storage** (candidate-reported); **Notes Sync for iCloud** (candidate-reported); guide-generated: Apple Maps, AirTag tracking, App Store, TinyURL, chess multiplayer, payment gateway with fraud detection, search engine, end-to-end encrypted messaging."
+   ],
+   "caveats": [
+    "**Caveat:** No standardized loop \u2014 everything here is team-specific and thinly reported."
+   ]
+  },
+  "netflix": {
+   "grading": [
+    "**Grading:** **Verbal format \u2014 likely no diagramming** (60 min, one senior/staff engineer, talk through it); reasoning about blast radius, failure modes, and trade-offs out loud; reciting a memorized \"design Netflix\" answer is described as \"a tell\"; research the team beforehand \u2014 prompts track their current work. Most important round at Netflix per multiple sources."
+   ],
+   "prompts": [
+    "**Prompts:** The team's **actual current problems** \u2014 e.g. \"How would you design a dynamic recommendation system?\" (profile-specific dynamic title categories); internal tooling: build-and-own event logging clients vs. document-and-let-teams-build (an unsolved problem the team was actively working through)."
+   ],
+   "caveats": []
+  }
+ },
+ "behavioral": {
+  "meta": {
+   "bullets": [
+    "Tell me about a time you resolved a conflict with a peer/engineer/manager.",
+    "Tell me about a time you worked under a tight deadline.",
+    "Tell me about the biggest challenge you've faced.",
+    "Tell me about a time you led a team / a technical project.",
+    "Tell me about a time you made a mistake / received negative feedback \u2014 what did you change?",
+    "Tell me about the boldest decision you've made.",
+    "Tell me about a time you took ownership of a failure.",
+    "Tell me about a time you worked with a cross-functional team.",
+    "Tell me about a difficult stakeholder / convincing engineers to adopt your approach.",
+    "Tell me about a time you worked with ambiguous requirements.",
+    "Tell me about the most technically and people-challenging situation you've navigated.",
+    "Values-flavored variants (Move Fast, Be Direct): tell me about a time you shipped fast under uncertainty; a time you gave blunt feedback."
+   ]
+  },
+  "amazon": {
+   "bullets": [
+    "Tell me about a time you had to make a decision with incomplete data. *(Are Right / Bias for Action)*",
+    "Tell me about a time you disagreed with a teammate or manager. What happened? *(Have Backbone; Disagree and Commit)*",
+    "Tell me about a time you worked under a tight deadline. *(Deliver Results)*",
+    "Tell me about a time you went above and beyond for a customer / handled a demanding customer. *(Customer Obsession)*",
+    "Tell me about a time you dug into the details to solve a problem. *(Dive Deep)*",
+    "Tell me about a time you failed. What did you learn / what would you change? *(Learn and Be Curious)*",
+    "Full one-per-LP set documented in notes/amazon.md (Hire and Develop the Best, Ownership, Invent and Simplify, Insist on the Highest Standards, Think Big, Frugality, Earn Trust, Learn and Be Curious, Bias for Action, Are Right, Disagree and Commit, Deliver Results, Have Backbone, Dive Deep, Customer Obsession, plus the 16th)."
+   ]
+  },
+  "google": {
+   "bullets": [
+    "Tell me about a time you led through ambiguous requirements.",
+    "Tell me about a conflict or disagreement with a colleague and how you resolved it.",
+    "Tell me about a failure and what you learned.",
+    "Tell me about a project that ran late \u2014 what did you do?",
+    "Tell me about a decision you made with incomplete information.",
+    "Tell me about a time you took initiative beyond your responsibilities.",
+    "Tell me about a time you helped others succeed / mentored someone.",
+    "Tell me about the most technically challenging project you've worked on.",
+    "Tell me about hard feedback you received.",
+    "Tell me about a time you pushed back on a decision.",
+    "Tell me about a time you were wrong.",
+    "Tell me about how you prioritize competing work.",
+    "Why Google?"
+   ]
+  },
+  "apple": {
+   "bullets": [
+    "How have you performed in your current role? (results, exceeding expectations)",
+    "Tell me about a time you took a different approach than the team.",
+    "How do you prioritize when overloaded?",
+    "Tell me about a failure.",
+    "Tell me about a difficult situation you navigated.",
+    "Are you willing to work hard / long hours when it matters?",
+    "What are you most proud of? (proudest projects)",
+    "Why Apple? / Which Apple product inspires you most? (frequent icebreaker)",
+    "**Caveat:** behavioral source coverage for Apple is the thinnest of the five."
+   ]
+  },
+  "netflix": {
+   "bullets": [
+    "Tell me about a time you disagreed with your manager. *(most commonly reported)*",
+    "Tell me about a time you disagreed with a leader. What did you do after the decision went the other way?",
+    "How do you handle constructive criticism?",
+    "What would your previous manager say about you if we called them? *(keeper test)*",
+    "Tell me about a time you failed.",
+    "How do you prioritize competing projects? / How do you manage multitasking?",
+    "What would you do if your manager made a decision that could harm Netflix?",
+    "Why do you want to work at Netflix? *(appears in virtually every interview)*",
+    "Tell me about working with limited resources and a tight deadline.",
+    "Which part of the Culture Memo appeals to you most?",
+    "What kind of improvement have you planned for yourself?",
+    "What don't you like about Netflix's culture?",
+    "Judgment probes: \"Tell me about a decision you made with bad or missing data \u2014 what did you bet on, were you right?\"; \"Walk me through a call you got wrong \u2014 when did you realize, what did it cost?\"; \"You have context but not permission \u2014 how do you decide whether to act?\""
+   ]
+  }
+ },
+ "researchShelves": [
+  {
+   "type": "system-design",
+   "company": "meta",
+   "title": "News feed fan-out + the celebrity problem",
+   "body": "Signature Meta prompt: scale a post seen by millions. Separate hot/cold paths. Grading: fan-out strategy under time pressure, failure modes, retries, blast radius, scale math (RPS x bytes), time-efficient sketching."
+  },
+  {
+   "type": "system-design",
+   "company": "meta",
+   "title": "Ad Click Aggregator",
+   "body": "Real-time ad clicks flowing into billing. Grading: failure modes, retries, blast radius; scale math; what breaks first under contention."
+  },
+  {
+   "type": "system-design",
+   "company": "meta",
+   "title": "Online Game Leaderboard",
+   "body": "Real-time top-K, write-heavy workload. Grading: write path under load, consistency trade-offs, failure modes."
+  },
+  {
+   "type": "system-design",
+   "company": "meta",
+   "title": "Ticket Booking System",
+   "body": "Atomicity under contention (double-booking prevention). Grading: concurrency control, failure modes, trade-off reasoning."
+  },
+  {
+   "type": "system-design",
+   "company": "meta",
+   "title": "Top-K System",
+   "body": "Heavy hitters over a large event stream. Grading: approximate vs exact, scale math, operational concerns."
+  },
+  {
+   "type": "system-design",
+   "company": "meta",
+   "title": "Product Architecture: Price Drop Tracker",
+   "body": "Event-driven price drop notifications. Grading: mapping decisions to product constraints, extensibility."
+  },
+  {
+   "type": "system-design",
+   "company": "amazon",
+   "title": "Prime Day flash-sale traffic spikes",
+   "body": "Burst absorption and queueing for extreme traffic spikes. Grading: write-ups must map decisions to Leadership Principles (Ownership, Dive Deep); failure scenarios; multi-region consistency."
+  },
+  {
+   "type": "system-design",
+   "company": "amazon",
+   "title": "CDN for media at scale",
+   "body": "Design a CDN for media delivery at scale. Grading: decisions mapped to LPs; extensibility over pure scale; failure modes."
+  },
+  {
+   "type": "system-design",
+   "company": "amazon",
+   "title": "Distributed DB with global reach + regional failover",
+   "body": "Global database with regional failover. Grading: consistency vs availability under partition, failover design."
+  },
+  {
+   "type": "system-design",
+   "company": "amazon",
+   "title": "Amazon Locker LLD",
+   "body": "Separate low-level design round: Amazon Locker. Grading: SOLID, extensibility, clean module boundaries."
+  },
+  {
+   "type": "system-design",
+   "company": "amazon",
+   "title": "Logger System LLD",
+   "body": "Low-level design: a logger system. Grading: extensibility, API design, SOLID."
+  },
+  {
+   "type": "system-design",
+   "company": "amazon",
+   "title": "Parking lot / elevator LLD",
+   "body": "Low-level design staples (parking lot, elevator, library checkout). Grading: OOD, modularity, extensibility."
+  },
+  {
+   "type": "system-design",
+   "company": "google",
+   "title": "YouTube: upload and serve at scale",
+   "body": "Video upload, storage, and serving at scale. Grading: trade-off reasoning, scaling math under explicit growth assumptions, monitoring/rollout/rollback."
+  },
+  {
+   "type": "system-design",
+   "company": "google",
+   "title": "Google Docs: collaborative editing",
+   "body": "Real-time collaborative editing. Grading: consistency models, operational concerns; expect mid-round constraint changes (the twist format)."
+  },
+  {
+   "type": "system-design",
+   "company": "google",
+   "title": "Web crawler",
+   "body": "Design a web crawler. Grading: scale math, politeness, freshness vs coverage trade-offs."
+  },
+  {
+   "type": "system-design",
+   "company": "google",
+   "title": "Google Maps: traffic and routing",
+   "body": "Traffic and routing at scale. Grading: data modeling, read/write trade-offs, operational concerns."
+  },
+  {
+   "type": "system-design",
+   "company": "google",
+   "title": "URL shortener",
+   "body": "Classic prompt. Grading: clear articulation for the hiring-committee packet beats cleverness; scaling math."
+  },
+  {
+   "type": "system-design",
+   "company": "google",
+   "title": "Notification system",
+   "body": "Fan-out to millions of devices. Grading: hot/cold paths, failure modes, operational concerns."
+  },
+  {
+   "type": "system-design",
+   "company": "apple",
+   "title": "iCloud-scale file storage",
+   "body": "Candidate-reported prompt. Grading: privacy as a first-class constraint (encryption, data minimization, on-device processing); operational excellence."
+  },
+  {
+   "type": "system-design",
+   "company": "apple",
+   "title": "Notes Sync for iCloud",
+   "body": "Candidate-reported: sync across devices. Grading: conflict resolution, privacy constraints, how it breaks at 3am."
+  },
+  {
+   "type": "system-design",
+   "company": "apple",
+   "title": "Distributed multi-vendor rate limiter",
+   "body": "Candidate-reported prompt. Grading: consistency across vendors, failure modes."
+  },
+  {
+   "type": "system-design",
+   "company": "apple",
+   "title": "End-to-end encrypted messaging",
+   "body": "Guide-generated prompt. Grading: privacy-first design, key management, metadata minimization."
+  },
+  {
+   "type": "system-design",
+   "company": "netflix",
+   "title": "The team's actual current problems",
+   "body": "Netflix prompts track the team's real work (e.g. dynamic recommendation systems, event logging tooling). Grading: verbal format - likely no diagramming (60 min, talk through it); reasoning about blast radius, failure modes, trade-offs out loud; reciting a memorized 'design Netflix' is described as a tell. Research the team beforehand."
+  },
+  {
+   "type": "system-design",
+   "company": "netflix",
+   "title": "Dynamic recommendation system",
+   "body": "Profile-specific dynamic title categories. Grading: verbal walkthrough; failure modes and trade-offs out loud."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time resolve a conflict with a peer/engineer/manager",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: resolving conflict."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time work under a tight deadline",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: driving results."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time the biggest challenge you've faced",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: embracing ambiguity."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time lead a team or technical project",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: driving results."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time a mistake or negative feedback - what did you change?",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: growing continuously."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time the boldest decision you've made",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: embracing ambiguity."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time take ownership of a failure",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: growing continuously."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time work with ambiguous requirements",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: embracing ambiguity."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time the most technically and people-challenging situation you've navigated",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: communicating effectively."
+  },
+  {
+   "type": "behavioral",
+   "company": "meta",
+   "title": "Tell me about a time ship fast under uncertainty",
+   "body": "Meta scores five signals: resolving conflict, growing continuously, embracing ambiguity, driving results, communicating effectively. Signal probed: embracing ambiguity."
+  },
+  {
+   "type": "behavioral",
+   "company": "amazon",
+   "title": "Tell me about a time you make a decision with incomplete data",
+   "body": "Amazon tests 16 Leadership Principles in every round; the Bar Raiser has veto. Principle probed: Are Right / Bias for Action."
+  },
+  {
+   "type": "behavioral",
+   "company": "amazon",
+   "title": "Tell me about a time you disagree with a teammate or manager - what happened?",
+   "body": "Amazon tests 16 Leadership Principles in every round; the Bar Raiser has veto. Principle probed: Have Backbone; Disagree and Commit."
+  },
+  {
+   "type": "behavioral",
+   "company": "amazon",
+   "title": "Tell me about a time you work under a tight deadline",
+   "body": "Amazon tests 16 Leadership Principles in every round; the Bar Raiser has veto. Principle probed: Deliver Results."
+  },
+  {
+   "type": "behavioral",
+   "company": "amazon",
+   "title": "Tell me about a time you go above and beyond for a customer / handle a demanding customer",
+   "body": "Amazon tests 16 Leadership Principles in every round; the Bar Raiser has veto. Principle probed: Customer Obsession."
+  },
+  {
+   "type": "behavioral",
+   "company": "amazon",
+   "title": "Tell me about a time you dig into the details to solve a problem",
+   "body": "Amazon tests 16 Leadership Principles in every round; the Bar Raiser has veto. Principle probed: Dive Deep."
+  },
+  {
+   "type": "behavioral",
+   "company": "amazon",
+   "title": "Tell me about a time you fail - what did you learn, what would you change?",
+   "body": "Amazon tests 16 Leadership Principles in every round; the Bar Raiser has veto. Principle probed: Learn and Be Curious."
+  },
+  {
+   "type": "behavioral",
+   "company": "amazon",
+   "title": "Tell me about a time you invent a simpler solution to a hard problem",
+   "body": "Amazon tests 16 Leadership Principles in every round; the Bar Raiser has veto. Principle probed: Invent and Simplify."
+  },
+  {
+   "type": "behavioral",
+   "company": "amazon",
+   "title": "Tell me about a time you raise the bar for your team",
+   "body": "Amazon tests 16 Leadership Principles in every round; the Bar Raiser has veto. Principle probed: Insist on the Highest Standards."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Tell me about a time you lead through ambiguous requirements",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Googleyness: ambiguity."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Tell me about a time you a conflict or disagreement with a colleague and how you resolved it",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Googleyness: leadership."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Tell me about a time you a failure and what you learned",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Googleyness: growth."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Tell me about a time you a project that ran late - what did you do?",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Googleyness: ownership."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Tell me about a time you a decision you made with incomplete information",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Googleyness: judgment."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Tell me about a time you took initiative beyond your responsibilities",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Googleyness: initiative."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Tell me about a time you helped others succeed / mentored someone",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Googleyness: collaboration."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Tell me about a time you hard feedback you received",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Googleyness: growth."
+  },
+  {
+   "type": "behavioral",
+   "company": "google",
+   "title": "Why Google?",
+   "body": "Google tests 'Googleyness' - leadership and ambiguity handling. Motivation - connect to actual products and work.."
+  },
+  {
+   "type": "behavioral",
+   "company": "apple",
+   "title": "How have you performed in your current role? Results, exceeding expectations",
+   "body": "Apple behavioral coverage is thin (team-specific loops); expect performance and secrecy-culture probes. Performance-focused loop."
+  },
+  {
+   "type": "behavioral",
+   "company": "apple",
+   "title": "A time you took a different approach than the team",
+   "body": "Apple behavioral coverage is thin (team-specific loops); expect performance and secrecy-culture probes. Independent thinking."
+  },
+  {
+   "type": "behavioral",
+   "company": "apple",
+   "title": "How do you prioritize when overloaded?",
+   "body": "Apple behavioral coverage is thin (team-specific loops); expect performance and secrecy-culture probes. Prioritization under load."
+  },
+  {
+   "type": "behavioral",
+   "company": "apple",
+   "title": "A failure",
+   "body": "Apple behavioral coverage is thin (team-specific loops); expect performance and secrecy-culture probes. Ownership."
+  },
+  {
+   "type": "behavioral",
+   "company": "apple",
+   "title": "A difficult situation you navigated",
+   "body": "Apple behavioral coverage is thin (team-specific loops); expect performance and secrecy-culture probes. Judgment."
+  },
+  {
+   "type": "behavioral",
+   "company": "apple",
+   "title": "What are you most proud of?",
+   "body": "Apple behavioral coverage is thin (team-specific loops); expect performance and secrecy-culture probes. Proudest projects."
+  },
+  {
+   "type": "behavioral",
+   "company": "apple",
+   "title": "Why Apple? Which Apple product inspires you most?",
+   "body": "Apple behavioral coverage is thin (team-specific loops); expect performance and secrecy-culture probes. Frequent icebreaker - have a genuine answer."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "Disagree with your manager",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Most commonly reported Netflix question."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "Disagree with a leader - what did you do after the decision went the other way?",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Disagree-and-commit, judgment."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "How do you handle constructive criticism?",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Feedback culture."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "What would your previous manager say about you?",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Keeper test."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "A time you failed",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Candor."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "What would you do if your manager made a decision that could harm Netflix?",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Courage / context over control."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "Why do you want to work at Netflix?",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Appears in virtually every interview."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "Tell me about a decision you made with bad or missing data - what did you bet on, were you right?",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Judgment under ambiguity."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "Walk me through a call you got wrong - when did you realize, what did it cost?",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Judgment probes."
+  },
+  {
+   "type": "behavioral",
+   "company": "netflix",
+   "title": "Which part of the Culture Memo appeals to you most?",
+   "body": "Netflix scores against the Culture Memo: judgment under ambiguity, candor, context over control. Culture alignment."
+  }
+ ]
+}
