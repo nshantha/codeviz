@@ -1,11 +1,24 @@
 import { spawn, ChildProcess } from "node:child_process";
 import { randomUUID } from "node:crypto";
+import os from "node:os";
 import type { TutorRequest } from "../../shared/types";
 import { tutorWorkDir } from "../paths";
 import { buildTutorPrompt } from "./prompts";
 import type { TutorProvider, TutorResult } from "./provider";
 
 const TIMEOUT_MS = 120_000;
+
+/**
+ * GUI-launched Electron processes on macOS often miss the user's shell PATH
+ * (no ~/.zshrc sourcing), so CLIs installed via Homebrew or ~/.local/bin are
+ * invisible to a bare spawn(). Augment PATH defensively for every probe/spawn.
+ */
+function cliEnv(): NodeJS.ProcessEnv {
+  const extra = ["/opt/homebrew/bin", "/usr/local/bin", `${os.homedir()}/.local/bin`, "/usr/bin", "/bin"];
+  const parts = (process.env.PATH ?? "").split(":").filter(Boolean);
+  for (const d of extra) if (!parts.includes(d)) parts.push(d);
+  return { ...process.env, PATH: parts.join(":"), TERM: "dumb" };
+}
 
 /**
  * Shared machinery for CLI-based tutors. Safety properties:
@@ -23,7 +36,7 @@ abstract class CliTutorBase implements TutorProvider {
 
   async checkAvailable(): Promise<{ available: boolean; detail: string }> {
     return new Promise((resolve) => {
-      const probe = spawn(this.binary, ["--version"], { shell: false, timeout: 10_000 });
+      const probe = spawn(this.binary, ["--version"], { shell: false, timeout: 10_000, env: cliEnv() });
       let out = "";
       probe.stdout?.on("data", (d) => (out += d.toString()));
       probe.on("error", () => resolve({ available: false, detail: `${this.binary} not found on PATH.` }));
@@ -62,7 +75,7 @@ abstract class CliTutorBase implements TutorProvider {
         shell: false,
         cwd: tutorWorkDir(),
         timeout: TIMEOUT_MS,
-        env: { ...process.env, TERM: "dumb" },
+        env: cliEnv(),
       });
       this.current = child;
       let out = "";

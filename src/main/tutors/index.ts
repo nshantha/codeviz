@@ -37,19 +37,47 @@ function resolveProvider(id: TutorProviderId): TutorProvider {
 
 /** Single constrained tutor call. Falls back to the built-in coach when the CLI is unavailable. */
 export async function tutorChat(req: TutorRequest): Promise<TutorResult> {
-  const selected = resolveProvider(getSelectedProviderId());
-  if (selected.id !== "none") {
+  let selected = resolveProvider(getSelectedProviderId());
+  let note = "";
+
+  if (selected.id === "none") {
+    // Auto-detect: users who finished onboarding before the AI-coach step
+    // existed are stuck on "none" forever otherwise. If a CLI is present,
+    // adopt it transparently and say so — the coach should just work.
+    let detected: TutorProvider | null = null;
+    for (const p of PROVIDERS) {
+      if (p.id === "none") continue;
+      const s = await p.checkAvailable().catch(() => ({ available: false, detail: "" }));
+      if (s.available) { detected = p; break; }
+    }
+    if (!detected) return selected.chat(req);
+    setSelectedProviderId(detected.id);
+    selected = detected;
+    note = `_(${detected.label} detected on this machine — using it as your coach from now on. Change anytime in Settings.)_\n\n`;
+  } else {
     const status = await selected.checkAvailable().catch(() => ({ available: false, detail: "" }));
     if (!status.available) {
-      const fallback = new NoAIProvider();
-      const r = await fallback.chat(req);
+      const r = await new NoAIProvider().chat(req);
       return {
-        reply: `_(${selected.label} unavailable — using the built-in offline coach.)_\n\n${r.reply}`,
+        reply: `_(${selected.label} unavailable — using the built-in offline coach. Check Settings for details.)_\n\n${r.reply}`,
         done: r.done,
       };
     }
   }
-  return selected.chat(req);
+
+  const result = await selected.chat(req);
+  if (selected.id !== "none" && result.done) {
+    // CliTutorBase reports done=true only on spawn/CLI failure. Don't leave
+    // the user with an error stub — serve real offline coaching instead.
+    const r = await new NoAIProvider().chat(req);
+    return {
+      reply:
+        `_(${selected.label} didn't return a response — here's the built-in coach instead. ` +
+        `If this keeps happening, check that the CLI works in your terminal.)_\n\n${r.reply}`,
+      done: false,
+    };
+  }
+  return note ? { reply: note + result.reply, done: result.done } : result;
 }
 
 export function cancelTutor(): void {

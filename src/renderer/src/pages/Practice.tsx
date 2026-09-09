@@ -343,6 +343,8 @@ function Workspace({ q, hideLabels, onBack, profile, go }: {
     } finally {
       setTutorBusy(false);
       setChatInput("");
+      // Auto-detect may have adopted a CLI provider mid-call; refresh the banner.
+      api().getTutorProvider().then(setProvider).catch(() => {});
     }
   };
 
