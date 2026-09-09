@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api";
 import type { ImportPreview, Profile, TutorProviderId, TutorProviderStatus } from "../../../shared/types";
 import { COMPANY_LABELS } from "../../../shared/types";
+import "../ai.css";
 
 export default function Settings({ profile, onProfile }: { profile: Profile; onProfile: (p: Profile) => void }) {
   const [providers, setProviders] = useState<TutorProviderStatus[]>([]);
@@ -90,19 +91,46 @@ export default function Settings({ profile, onProfile }: { profile: Profile; onP
 
       <h2>AI tutor</h2>
       <div className="card">
-        <p className="small" style={{ marginTop: 0 }}>
-          Runs the <b>locally authenticated</b> CLI on this machine — your subscription, no API keys in AlgoMentor.
-          Single-purpose Socratic calls only; the built-in coach works offline.
-        </p>
+        <div className="row" style={{ justifyContent: "space-between", marginBottom: 8 }}>
+          <p className="small" style={{ margin: 0, flex: 1 }}>
+            Runs the <b>locally authenticated</b> CLI on this machine — your subscription, no API keys in AlgoMentor.
+            Single-purpose Socratic calls only; the built-in coach always works offline.
+          </p>
+          <button className="btn ghost small" onClick={refresh}>Re-check</button>
+        </div>
+        <div className="small" style={{ marginBottom: 8 }}>
+          Current: <b>{providers.find((p) => p.id === selected)?.label ?? "—"}</b>
+        </div>
         {providers.map((p) => (
-          <div className="check-row" key={p.id}>
-            <input type="radio" name="provider" checked={selected === p.id} onChange={() => void chooseProvider(p.id)} />
+          <div className="provider-row" key={p.id}>
+            <input type="radio" name="provider" checked={selected === p.id} onChange={() => void chooseProvider(p.id)} style={{ marginTop: 4 }} />
             <div>
-              <b>{p.label}</b> <span className={`badge ${p.available ? "easy" : ""}`}>{p.available ? "available" : "unavailable"}</span>
-              <div className="small">{p.detail}</div>
+              <div>
+                <b>{p.label}</b>{" "}
+                <span className={`badge ${p.available ? "easy" : ""}`}>{p.available ? "available" : "unavailable"}</span>
+              </div>
+              <div className="provider-detail">{p.detail}</div>
             </div>
           </div>
         ))}
+        <details className="setup-collapsible">
+          <summary>Setup help — install Claude Code or Codex</summary>
+          <div className="setup-help">
+            <ol>
+              <li>
+                <b>Claude Code:</b> <code className="cli-cmd">npm install -g @anthropic-ai/claude-code</code>,
+                then run <code className="cli-cmd">claude</code> to log in.
+              </li>
+              <li>
+                <b>Codex:</b> <code className="cli-cmd">npm install -g @openai/codex</code>,
+                then run <code className="cli-cmd">codex</code> to log in.
+              </li>
+            </ol>
+            <p className="small" style={{ marginBottom: 0 }}>
+              After installing, hit <b>Re-check</b> above. Nothing installed? The built-in coach works fully offline — no setup needed.
+            </p>
+          </div>
+        </details>
       </div>
 
       <h2>Backup</h2>

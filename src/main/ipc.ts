@@ -14,6 +14,8 @@ import {
   getConfusablePairs,
   getNextUpInternal,
 } from "./learning/scheduler";
+import { getGameStateInternal, recordDrillCompletionInternal } from "./game";
+import { saveMockSessionInternal, listMockSessionsInternal } from "./mock";
 import { PATTERN_LESSONS } from "./data/patterns";
 import { BASICS_DRILLS } from "./data/basics";
 import { listDesignPromptsInternal, listDesignSessionsInternal, saveDesignSessionInternal } from "./design";
@@ -71,6 +73,12 @@ const handlers: Record<IpcMethod, Handler> = {
   getReviewQueue: async () => getReviewQueueInternal(),
   getPatternStates: async () => getPatternStatesInternal(),
   getConfusablePairs: async () => getConfusablePairs(),
+
+  getGameState: async () => getGameStateInternal(),
+  recordDrillCompletion: async (_e, pairA, pairB) => recordDrillCompletionInternal(pairA, pairB),
+
+  saveMockSession: async (_e, s) => saveMockSessionInternal(s),
+  listMockSessions: async () => listMockSessionsInternal(),
 
   listDesignPrompts: async (_e, company) => listDesignPromptsInternal(company),
   saveDesignSession: async (_e, s) => saveDesignSessionInternal(s),

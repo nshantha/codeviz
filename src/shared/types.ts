@@ -205,6 +205,8 @@ export interface TutorTurn {
 
 export interface TutorRequest {
   kind: "coding" | "system-design" | "behavioral";
+  /** practice = normal coaching, mock = timed interviewer, debrief = scored feedback */
+  mode?: "practice" | "mock" | "debrief";
   questionId?: number;
   prompt?: string;
   history: TutorTurn[];
@@ -262,6 +264,79 @@ export interface ReportData {
   markdown: string;
 }
 
+// ---------------------------------------------------------------- game layer
+
+export type RingTier = "none" | "bronze" | "silver" | "gold" | "mastered";
+export const RING_LABELS: Record<RingTier, string> = {
+  none: "Unranked",
+  bronze: "Bronze",
+  silver: "Silver",
+  gold: "Gold",
+  mastered: "Mastered",
+};
+
+export interface PatternRing {
+  pattern: string;
+  tier: RingTier;
+  mastery: number;
+  attempted: number;
+  solved: number;
+}
+
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  unlockedAt: string | null;
+}
+
+export interface JourneyDay {
+  date: string; // YYYY-MM-DD
+  active: boolean;
+  attempts: number;
+}
+
+export interface JourneyWeek {
+  week: number;
+  title: string;
+  focus: string;
+  days: JourneyDay[];
+  isCurrent: boolean;
+  isPast: boolean;
+}
+
+export interface GameState {
+  xp: number;
+  level: number;
+  xpIntoLevel: number;
+  xpForNextLevel: number;
+  rings: PatternRing[];
+  /** Current Mon..Sun week */
+  weeklyDays: JourneyDay[];
+  weeklyActiveCount: number;
+  /** Last 120 days: date -> attempt count */
+  heatmap: Record<string, number>;
+  achievements: Achievement[];
+  journey: { weeks: JourneyWeek[]; currentWeek: number };
+  totals: { attempts: number; solved: number; unaidedIds: number; noHintSolves: number };
+}
+
+export type MockKind = "coding" | "system-design" | "behavioral";
+
+export interface MockSession {
+  id: string;
+  deviceId: string;
+  kind: MockKind;
+  /** question id (coding) or prompt text (design/behavioral) */
+  reference: string;
+  score: number | null; // 0..100, set at debrief
+  notes: string; // debrief text
+  durationMs: number | null;
+  startedAt: string;
+  endedAt: string | null;
+  createdAt: string;
+}
+
 // ---------------------------------------------------------------- IPC API
 
 /** Every method the renderer may call. Implemented in main, exposed via preload. */
@@ -279,9 +354,24 @@ export interface AlgoMentorAPI {
   getPattern(name: string): Promise<PatternInfo | null>;
 
   // practice
-  recordAttempt(a: AttemptInput): Promise<{ attempt: Attempt; patternState: PatternState; reviewItem: ReviewItem }>;
+  recordAttempt(a: AttemptInput): Promise<{
+    attempt: Attempt;
+    patternState: PatternState;
+    reviewItem: ReviewItem;
+    xpGained: number;
+    leveledUp: boolean;
+    newAchievements: Achievement[];
+  }>;
   listAttempts(questionId?: number): Promise<Attempt[]>;
   getNextUp(limit?: number): Promise<NextUpItem[]>;
+
+  // game layer
+  getGameState(): Promise<GameState>;
+  recordDrillCompletion(pairA: string, pairB: string): Promise<{ unlocked: Achievement[] }>;
+
+  // friday mock
+  saveMockSession(s: Partial<MockSession> & { kind: MockKind; reference: string }): Promise<{ session: MockSession; newAchievements: Achievement[] }>;
+  listMockSessions(): Promise<MockSession[]>;
 
   // review
   getReviewQueue(): Promise<ReviewItem[]>;

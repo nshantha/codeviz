@@ -19,6 +19,13 @@ export class NoAIProvider implements TutorProvider {
   }
 
   async chat(req: TutorRequest): Promise<TutorResult> {
+    const mode = req.mode ?? "practice";
+    if (mode === "mock") {
+      return { reply: this.mockPrompt(req), done: false };
+    }
+    if (mode === "debrief") {
+      return { reply: this.debriefPrompt(req), done: false };
+    }
     const level = Math.min(Math.max(req.context.hintLevel ?? 1, 1), 5);
     if (req.kind === "system-design") {
       return { reply: this.designPrompt(req), done: false };
@@ -62,6 +69,49 @@ export class NoAIProvider implements TutorProvider {
       `I'll be listening for three things: (1) what YOU personally did vs the team, ` +
       `(2) a specific decision or conflict, not a summary, and (3) a measurable outcome. ` +
       `Go ahead — which story are you bringing?`
+    );
+  }
+
+  private mockPrompt(req: TutorRequest): string {
+    const kindLabel = req.kind === "coding" ? "coding" : req.kind === "system-design" ? "system design" : "behavioral";
+    return (
+      `**Mock interviewer (${kindLabel})** — the clock is running.\n\n` +
+      `I'll run this like the real thing: one question at a time, no hints, no teaching until the debrief. ` +
+      `Talk through your thinking out loud as you go — communication is graded.\n\n` +
+      `Let's begin. ${req.userMessage ? "" : "Tell me when you're ready for the first question."}`
+    );
+  }
+
+  private debriefPrompt(req: TutorRequest): string {
+    const rubrics: Record<string, string[]> = {
+      "coding": [
+        "Problem understanding (0-25)",
+        "Approach & pattern recognition (0-25)",
+        "Code correctness & edge cases (0-25)",
+        "Complexity analysis & communication (0-25)",
+      ],
+      "system-design": [
+        "Requirements & estimation (0-25)",
+        "Architecture (0-25)",
+        "Deep dive & trade-offs (0-25)",
+        "Communication (0-25)",
+      ],
+      "behavioral": [
+        "STAR structure (0-25)",
+        "Personal ownership (0-25)",
+        "Evidence & outcomes (0-25)",
+        "Relevance (0-25)",
+      ],
+    };
+    const rubric = rubrics[req.kind] ?? rubrics["coding"];
+    return (
+      `**Mock debrief**\n\n` +
+      `Time's up. Here's how I'd score this round — score yourself first, then compare:\n\n` +
+      rubric.map((r) => `- ${r}: ___`).join("\n") +
+      `\n\nSCORE: ___ / 100\n\n` +
+      `Biggest strength: ___\nTop fix for next time: ___\nOne drill for this week: ___\n\n` +
+      `Note: the built-in coach can't watch you solve — for a real scored debrief, ` +
+      `connect Claude Code or Codex in Settings and run the mock again.`
     );
   }
 }

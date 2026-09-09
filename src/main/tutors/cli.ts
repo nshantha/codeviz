@@ -49,6 +49,14 @@ abstract class CliTutorBase implements TutorProvider {
   async chat(req: TutorRequest): Promise<TutorResult> {
     const prompt = buildTutorPrompt(req);
     const args = this.buildArgs(prompt);
+    // Log the exact spawn for debuggability. The prompt arg is truncated in
+    // the log (full prompt length noted) to avoid flooding logs; the command
+    // itself is byte-identical to what is spawned below.
+    const loggedArgs = args.map((a) =>
+      a === prompt ? `<prompt ${prompt.length} chars: ${JSON.stringify(prompt.slice(0, 200))}…>` : a,
+    );
+    // eslint-disable-next-line no-console
+    console.log(`[tutor] spawning: ${this.binary} ${loggedArgs.join(" ")} (cwd=app-owned tutor dir, shell=false, timeout=${TIMEOUT_MS}ms)`);
     return new Promise((resolve) => {
       const child = spawn(this.binary, args, {
         shell: false,

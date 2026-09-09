@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../api";
-import type { Company, Profile } from "../../../shared/types";
+import type { Company, Profile, TutorProviderId, TutorProviderStatus } from "../../../shared/types";
 import { COMPANIES, COMPANY_LABELS } from "../../../shared/types";
+import "../ai.css";
 
 const DIAGNOSTIC = [
   {
@@ -88,8 +89,10 @@ export default function Onboarding({ onDone }: { onDone: (p: Profile) => void })
         <p className="small">Question banks, system design prompts, and behavioral questions adapt to these.</p>
       </div>
 
+      <AiCoachStep />
+
       <div className="card">
-        <h3>2. Your situation</h3>
+        <h3>3. Your situation</h3>
         <div className="grid2">
           <label className="field">
             <span>Interview date (optional)</span>
@@ -115,7 +118,7 @@ export default function Onboarding({ onDone }: { onDone: (p: Profile) => void })
       </div>
 
       <div className="card">
-        <h3>3. Where to start</h3>
+        <h3>4. Where to start</h3>
         <div className="check-row">
           <input type="radio" name="entry" checked={entryPoint === "basics"} onChange={() => setEntryPoint("basics")} />
           <div><b>Basics gate</b> <span className="small">— 12 prerequisite drills first (recommended)</span></div>
@@ -152,6 +155,79 @@ export default function Onboarding({ onDone }: { onDone: (p: Profile) => void })
       <button className="btn" style={{ width: "100%", padding: 14 }} disabled={saving} onClick={finish}>
         {saving ? "Setting up…" : "Start my plan →"}
       </button>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------- AI coach step */
+
+function AiCoachStep() {
+  const [providers, setProviders] = useState<TutorProviderStatus[]>([]);
+  const [selected, setSelected] = useState<TutorProviderId>("none");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const [ps, cur] = await Promise.all([api().getTutorProviders(), api().getTutorProvider()]);
+        setProviders(ps);
+        setSelected(cur);
+      } catch {
+        // Non-fatal: the built-in coach always works. Leave defaults.
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
+  const choose = async (id: TutorProviderId) => {
+    setSelected(id);
+    try { await api().setTutorProvider(id); } catch { /* selection stays local */ }
+  };
+
+  const anyAvailable = providers.some((p) => p.available);
+
+  return (
+    <div className="card">
+      <h3>2. AI coach</h3>
+      <p className="small" style={{ marginTop: 0 }}>
+        Train with AI for the AI round — Meta's coding round is AI-enabled; practice the way you'll perform.
+        Picks up your locally authenticated CLI, or use the built-in coach. You can change this anytime in Settings.
+      </p>
+      {loading && <span className="small">Checking providers…</span>}
+      {!loading && providers.map((p) => (
+        <div className="provider-row" key={p.id}>
+          <input type="radio" name="onboard-provider" checked={selected === p.id} onChange={() => void choose(p.id)} style={{ marginTop: 4 }} />
+          <div>
+            <div>
+              <b>{p.label}</b>{" "}
+              <span className={`badge ${p.available ? "easy" : ""}`}>{p.available ? "available" : "unavailable"}</span>
+            </div>
+            <div className="provider-detail">{p.detail}</div>
+          </div>
+        </div>
+      ))}
+      {!loading && !anyAvailable && (
+        <div className="setup-help">
+          <b>No AI provider found on this machine.</b> Set one up to unlock the full AI interviewer,
+          or continue with the built-in coach — it always works offline.
+          <ol>
+            <li>
+              <b>Claude Code:</b> <code className="cli-cmd">npm install -g @anthropic-ai/claude-code</code>,
+              then run <code className="cli-cmd">claude</code> to log in.
+            </li>
+            <li>
+              <b>Codex:</b> <code className="cli-cmd">npm install -g @openai/codex</code>,
+              then run <code className="cli-cmd">codex</code> to log in.
+            </li>
+          </ol>
+        </div>
+      )}
+      {!loading && (
+        <button className="btn ghost" style={{ width: "100%", marginTop: 12 }} onClick={() => void choose("none")}>
+          {selected === "none" ? "✓ Using built-in coach" : "Continue with built-in coach"}
+        </button>
+      )}
     </div>
   );
 }

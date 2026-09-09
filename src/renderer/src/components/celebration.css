@@ -1,0 +1,70 @@
+/* Shared celebration styles: XP tickers, level-up banner, achievement toasts.
+   Dark, alive, not garish. */
+
+.celebrate-wrap {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.celebrate {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  animation: celebrate-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+@keyframes celebrate-in {
+  from { transform: translateY(-12px) scale(0.96); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.xp-tick {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent2);
+  text-shadow: 0 0 18px rgba(61, 214, 140, 0.35);
+  animation: xp-pop 0.5s ease-out;
+}
+@keyframes xp-pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.levelup {
+  background: linear-gradient(135deg, #1b2b4a, #123a2c);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(110, 159, 255, 0.25);
+  animation: levelup-glow 1.6s ease-in-out infinite alternate;
+}
+@keyframes levelup-glow {
+  from { box-shadow: 0 8px 32px rgba(110, 159, 255, 0.18); }
+  to { box-shadow: 0 8px 40px rgba(61, 214, 140, 0.35); }
+}
+.levelup-title {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.ach-toast {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--bg2);
+  border: 1px solid var(--warn);
+  border-radius: 10px;
+  padding: 10px 14px;
+  max-width: 320px;
+  animation: celebrate-in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+.ach-icon { font-size: 22px; }

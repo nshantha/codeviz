@@ -8,14 +8,18 @@ import Practice from "./pages/Practice";
 import Review from "./pages/Review";
 import Design from "./pages/Design";
 import Behavioral from "./pages/Behavioral";
+import Mock from "./pages/Mock";
+import Journey from "./pages/Journey";
 import Progress from "./pages/Progress";
 import Settings from "./pages/Settings";
 
 const NAV = [
   ["dashboard", "Dashboard"],
+  ["journey", "Journey"],
   ["patterns", "Patterns"],
   ["practice", "Practice"],
   ["review", "Review"],
+  ["mock", "Friday Mock"],
   ["design", "System Design"],
   ["behavioral", "Behavioral"],
   ["progress", "Progress"],
@@ -68,9 +72,11 @@ export default function App() {
       </div>
       <div className="main">
         {page === "dashboard" && <Dashboard profile={profile} go={go} />}
+        {page === "journey" && <Journey />}
         {page === "patterns" && <Patterns focus={pageArg} go={go} />}
         {page === "practice" && <Practice profile={profile} initial={pageArg} go={go} />}
         {page === "review" && <Review go={go} />}
+        {page === "mock" && <Mock profile={profile} go={go} />}
         {page === "design" && <Design profile={profile} />}
         {page === "behavioral" && <Behavioral profile={profile} />}
         {page === "progress" && <Progress />}

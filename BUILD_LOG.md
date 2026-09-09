@@ -99,3 +99,37 @@ prototype on `main`:
   better-sqlite3 ABI mismatch (added postinstall electron-rebuild);
   catalog JSON not copied to dist (added build:data step);
   meta-table chicken-and-egg in migrations.
+
+## UI/UX overhaul + AI surfacing (2026-09-09, local commit, not pushed)
+
+Rebuilt the renderer as an interactive gamified trainer on the same engine:
+
+- **Game layer (main)**: `src/main/game.ts` derives XP/levels/rings/
+  heatmap/weekly ring/achievements/journey from the attempt log. Schema v4
+  adds `achievements`, `drill_completions`, `mock_sessions` tables.
+  `recordAttempt` now returns `xpGained/leveledUp/newAchievements`.
+- **New IPC**: `getGameState`, `recordDrillCompletion`, `saveMockSession`,
+  `listMockSessions`. Preload stays an explicit method list (no Proxy).
+- **Tutor modes**: `practice | mock | debrief` on `TutorRequest`. Mock =
+  interviewer persona with no hints; debrief = structured 0–100 rubric
+  scoring. CLI spawn commands are logged exactly for later validation.
+  **Real Claude Code / Codex calls still untested in this environment.**
+- **Dashboard**: level + animated XP bar, weekly 5-of-7 ring, 12-week
+  heatmap strip, stats, up-next. **Journey page**: 8-week timeline, pattern
+  rings board, achievements grid, 120-day heatmap.
+- **Practice**: mental-trace stepper + variable table, always-on coach
+  panel (Ask coach / Explain my mistake / complexity / edge cases), offline
+  nudge banner. **Patterns**: recognition + trigger-match drills.
+  **Review**: card deck with flip, keyboard shortcuts, deep-links.
+- **Friday Mock page**: timed boss fights with AI interviewer, rubric
+  debrief with parsed score, past-mock history.
+- **Design/Behavioral**: AI interview mode toggle, "10x twist" button,
+  per-story mock interviews with ownership probing.
+- **Onboarding**: new "AI Coach" step (CLI detection, health, setup
+  commands, built-in fallback). **Settings**: provider health + re-check.
+
+Verification: `npm run typecheck` clean; `npm run build` succeeds; headless
+`npm run dev` from wiped `dist` boots, applies migration v4 on a fresh DB,
+reports catalog 171, zero compile errors. Renderer interactions
+(type-checked) not click-tested; Claude/Codex integration pending on the
+user's Mac. Commit kept local per instruction — not pushed.

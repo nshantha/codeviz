@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../api";
 import type { BehavioralQuestion, Company, Profile, Story, TutorTurn } from "../../../shared/types";
 import { COMPANIES, COMPANY_LABELS } from "../../../shared/types";
+import "../ai.css";
 
 export default function Behavioral({ profile }: { profile: Profile }) {
   const [company, setCompany] = useState<Company>(profile.targetCompanies[0] ?? "meta");
   const [questions, setQuestions] = useState<BehavioralQuestion[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
   const [editing, setEditing] = useState<Partial<Story> | null>(null);
+  const [interviewing, setInterviewing] = useState<Story | null>(null);
 
   useEffect(() => {
     api().listBehavioralQuestions(company).then(setQuestions).catch(() => {});
@@ -20,6 +22,10 @@ export default function Behavioral({ profile }: { profile: Profile }) {
 
   if (editing) {
     return <StoryEditor initial={editing} onDone={() => { setEditing(null); refresh(); }} />;
+  }
+
+  if (interviewing) {
+    return <StoryInterview story={interviewing} company={company} onBack={() => setInterviewing(null)} />;
   }
 
   return (
@@ -37,6 +43,7 @@ export default function Behavioral({ profile }: { profile: Profile }) {
           <div className="row" style={{ justifyContent: "space-between" }}>
             <h3 style={{ margin: 0 }}>{s.title}</h3>
             <div className="row">
+              <button className="btn small" onClick={() => setInterviewing(s)}>🎙️ Mock interview</button>
               <button className="btn ghost small" onClick={() => { void api().rehearseStory(s.id).then(refresh); }}>
                 Rehearse{s.rehearsalCount > 0 ? ` (${s.rehearsalCount})` : ""}
               </button>
@@ -64,6 +71,108 @@ export default function Behavioral({ profile }: { profile: Profile }) {
     </div>
   );
 }
+
+/* ------------------------------------------------- story mock interview */
+
+function starText(s: Story): string {
+  return [
+    `Title: ${s.title}`,
+    s.situation ? `Situation: ${s.situation}` : "",
+    s.task ? `Task: ${s.task}` : "",
+    s.action ? `Action: ${s.action}` : "",
+    s.result ? `Result: ${s.result}` : "",
+    s.competencies.length > 0 ? `Competencies: ${s.competencies.join(", ")}` : "",
+  ].filter(Boolean).join("\n");
+}
+
+function StoryInterview({ story, company, onBack }: { story: Story; company: Company; onBack: () => void }) {
+  const [chat, setChat] = useState<TutorTurn[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
+
+  const sendChat = async (history: TutorTurn[], message: string) => {
+    setBusy(true);
+    try {
+      const res = await api().tutorChat({
+        kind: "behavioral",
+        mode: "mock",
+        prompt: starText(story),
+        history,
+        userMessage: message,
+        context: { company },
+      });
+      setChat([...history, { role: "tutor", text: res.reply, at: new Date().toISOString() }]);
+    } catch (e) {
+      setChat([...history, { role: "tutor", text: `Error: ${e instanceof Error ? e.message : String(e)}`, at: new Date().toISOString() }]);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const begin = () => {
+    const message = `Run a behavioral mock interview on my story below. Ask me the story as a question, then probe my answers. Never invent details about my experience — only work with what I tell you.\n\n${starText(story)}`;
+    const history: TutorTurn[] = [{ role: "user", text: message, at: new Date().toISOString() }];
+    setChat(history);
+    void sendChat(history, message);
+  };
+
+  const ownershipCheck = () => {
+    const message = "Ask me the hard ownership questions about this story — what did *I* personally do?";
+    const history = [...chat, { role: "user" as const, text: message, at: new Date().toISOString() }];
+    setChat(history);
+    void sendChat(history, message);
+  };
+
+  const send = () => {
+    if (!chatInput.trim()) return;
+    const history = [...chat, { role: "user" as const, text: chatInput, at: new Date().toISOString() }];
+    setChat(history);
+    setChatInput("");
+    void sendChat(history, history[history.length - 1].text);
+  };
+
+  return (
+    <div>
+      <button className="btn ghost small" onClick={onBack}>← Back to story bank</button>
+      <h1 style={{ fontSize: 20, marginTop: 12 }}>🎙️ Mock interview: {story.title}</h1>
+      <p className="sub">
+        The interviewer probes for evidence and personal ownership — and never invents your experience.
+        Answer in your own words, like you would in the round.
+      </p>
+      <div className="card">
+        {chat.length === 0 && (
+          <div className="row" style={{ marginBottom: 4 }}>
+            <button className="btn" disabled={busy} onClick={begin}>Start interview</button>
+          </div>
+        )}
+        {chat.length > 0 && (
+          <div className="quick-actions">
+            <button className="btn ghost small" disabled={busy} onClick={ownershipCheck}>
+              🔍 Ownership check
+            </button>
+          </div>
+        )}
+        <div className="chat" style={{ maxHeight: 440 }}>
+          {chat.map((m, i) => <div key={i} className={`msg ${m.role}`}>{m.text}</div>)}
+          {chat.length === 0 && <span className="small">Press Start interview. The AI asks the questions — you answer.</span>}
+          <div ref={chatEndRef} />
+        </div>
+        <div className="row">
+          <input type="text" value={chatInput} onChange={(e) => setChatInput(e.target.value)} placeholder="Answer the interviewer…"
+            onKeyDown={(e) => { if (e.key === "Enter") send(); }} />
+          <button className="btn small" disabled={busy || !chatInput.trim()} onClick={send}>{busy ? "…" : "Send"}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------ story editor */
 
 function StoryEditor({ initial, onDone }: { initial: Partial<Story>; onDone: () => void }) {
   const [s, setS] = useState<Partial<Story>>({ competencies: [], situation: "", task: "", action: "", result: "", ...initial });

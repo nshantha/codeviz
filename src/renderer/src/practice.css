@@ -1,0 +1,94 @@
+/* Practice workspace: trace stepper, variable table, coach, card deck, drills.
+   Dark, subtle motion; complements styles.css variables. */
+
+.prac-wrap { display: grid; grid-template-columns: 1fr 360px; gap: 16px; align-items: start; }
+@media (max-width: 1000px) { .prac-wrap { grid-template-columns: 1fr; } }
+.prac-main { min-width: 0; }
+.coach { position: sticky; top: 12px; }
+
+.offline-banner {
+  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(90deg, #1a2230, #151a22);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 10px 14px; margin-bottom: 14px; font-size: 13px;
+}
+.offline-banner .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warn); flex-shrink: 0; animation: pulse 2.2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+.codepad {
+  width: 100%; min-height: 320px;
+  font-family: ui-monospace, Menlo, monospace; font-size: 13px; line-height: 1.55;
+}
+.codepad:focus { outline: none; border-color: var(--accent); }
+
+.trace-bar { display: flex; gap: 8px; align-items: center; margin: 14px 0 8px; }
+.trace-lines { max-height: 300px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; background: #0a0d12; }
+.trace-line {
+  display: flex; gap: 10px; padding: 3px 12px;
+  font-family: ui-monospace, Menlo, monospace; font-size: 12.5px;
+  white-space: pre; border-left: 3px solid transparent; color: var(--muted);
+}
+.trace-line .ln { width: 28px; flex-shrink: 0; text-align: right; user-select: none; }
+.trace-line.cur {
+  background: rgba(110, 159, 255, 0.10);
+  border-left-color: var(--accent);
+  color: var(--text);
+}
+.trace-line.done { color: var(--muted); }
+.trace-line .ln { color: #556072; }
+
+.trace-step-row { display: flex; gap: 8px; align-items: center; margin: 10px 0; }
+.trace-step-row .step-ind { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); }
+
+.vartable { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.vartable th { text-align: left; font-size: 11px; color: var(--muted); font-weight: 600; padding: 6px 8px; }
+.vartable td { padding: 4px 6px; }
+.vartable input { padding: 6px 8px; font-size: 13px; font-family: ui-monospace, monospace; }
+.vartable .vname { width: 34%; }
+.vartable .vval { width: 52%; }
+.vartable .vdel { width: 40px; }
+.vartable .btn { padding: 4px 8px; }
+
+.coach-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.coach .chat { max-height: 320px; }
+
+/* ---- card deck (Review) ---- */
+.deck-top { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+.flipcard {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px 24px; min-height: 240px; cursor: pointer; position: relative;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1.2), border-color 0.2s;
+  transform-style: preserve-3d;
+}
+.flipcard:hover { border-color: var(--accent); }
+.flipcard.flipped { transform: rotateY(180deg); }
+.flipcard .face { backface-visibility: hidden; }
+.flipcard .face.back { transform: rotateY(180deg); position: absolute; inset: 28px 24px; overflow-y: auto; }
+.flipcard h3 { margin: 0 0 8px; font-size: 18px; }
+.flipcard .triggers li { margin-bottom: 4px; }
+.flipcard .due-badge { position: absolute; top: 16px; right: 18px; }
+
+/* ---- drills ---- */
+.drill-q { font-size: 16px; font-weight: 600; margin: 6px 0 12px; }
+.opt-list { display: grid; gap: 8px; margin-top: 10px; }
+.opt {
+  text-align: left; background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px; padding: 10px 14px; cursor: pointer; font-size: 14px;
+  transition: border-color 0.15s, background 0.15s, transform 0.08s;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-1px); }
+.opt:disabled { cursor: default; opacity: 0.95; }
+.opt.right { border-color: var(--accent2); background: rgba(61, 214, 140, 0.10); }
+.opt.wrong { border-color: var(--danger); background: rgba(229, 72, 77, 0.10); }
+.drill-feedback { margin-top: 12px; }
+.streak { font-weight: 700; color: var(--warn); }
+.drill-tabs { display: flex; gap: 8px; margin: 14px 0; }
+
+.fade-in { animation: fadeIn 0.25s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.tabbtn {
+  background: var(--bg3); border: 1px solid var(--border); color: var(--muted);
+  padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 13px;
+}
+.tabbtn.on { background: var(--accent); border-color: var(--accent); color: #0a0f16; font-weight: 600; }

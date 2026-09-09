@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { api, fmtMs } from "../api";
-import type { AttemptOutcome, Company, Profile, Question, TutorTurn } from "../../../shared/types";
+import type { AttemptOutcome, Company, Profile, Question, TutorTurn, TutorProviderId } from "../../../shared/types";
 import { COMPANIES, COMPANY_LABELS } from "../../../shared/types";
+import { Celebration, type CelebrationData } from "../components/Celebration";
+import "../practice.css";
 
 /** Timer that separates active time from elapsed (pauses on hide / manual pause). */
 function useTimer() {
@@ -56,13 +58,33 @@ function TimerBadge({ ms, label }: { ms: number; label: string }) {
   );
 }
 
+/**
+ * `initial` accepts:
+ *  - a leetcodeId number (legacy: Review deep-links)
+ *  - { pattern }             (Patterns page deep-link)
+ *  - { questionId, hideLabels } (Review card deck deep-link into hidden-label mode)
+ */
+type InitialArg = number | { pattern?: string; questionId?: number; hideLabels?: boolean } | undefined;
+
+function parseInitial(initial: unknown): InitialArg {
+  if (typeof initial === "number") return initial;
+  if (initial && typeof initial === "object") {
+    const o = initial as { pattern?: string; questionId?: number; hideLabels?: boolean };
+    if (typeof o.questionId === "number" || typeof o.pattern === "string" || typeof o.hideLabels === "boolean") return o;
+  }
+  return undefined;
+}
+
 export default function Practice({ profile, initial, go }: { profile: Profile; initial?: unknown; go: (page: string, arg?: unknown) => void }) {
+  const init = parseInitial(initial);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [patterns, setPatterns] = useState<string[]>([]);
   const [fCompanies, setFCompanies] = useState<Company[]>(profile.targetCompanies);
-  const [fPattern, setFPattern] = useState<string>((initial as { pattern?: string })?.pattern ?? "");
+  const [fPattern, setFPattern] = useState<string>(typeof init === "object" ? (init.pattern ?? "") : "");
   const [fSection, setFSection] = useState("");
-  const [hideLabels, setHideLabels] = useState(false);
+  const [hideLabels, setHideLabels] = useState<boolean>(
+    typeof init === "object" ? (init.hideLabels ?? false) : false,
+  );
   const [search, setSearch] = useState("");
   const [active, setActive] = useState<Question | null>(null);
   const [loading, setLoading] = useState(true);
@@ -77,10 +99,15 @@ export default function Practice({ profile, initial, go }: { profile: Profile; i
       .listQuestions({ companies: fCompanies, patterns: fPattern ? [fPattern] : undefined, section: (fSection || undefined) as never })
       .then((q) => {
         setQuestions(q);
-        const initId = typeof initial === "number" ? initial : undefined;
-        if (initId) {
+        const initId = typeof init === "number" ? init : init?.questionId;
+        if (initId && !active) {
           const found = q.find((x) => x.leetcodeId === initId);
-          if (found) setActive(found);
+          if (found) {
+            setActive(found);
+          } else {
+            // deep-link target outside the current filter: fetch directly
+            api().getQuestion(initId).then((g) => { if (g) setActive(g); }).catch(() => {});
+          }
         }
       })
       .catch(() => {})
@@ -96,7 +123,7 @@ export default function Practice({ profile, initial, go }: { profile: Profile; i
     setFCompanies((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]));
 
   if (active) {
-    return <Workspace q={active} hideLabels={hideLabels} onBack={() => setActive(null)} profile={profile} />;
+    return <Workspace q={active} hideLabels={hideLabels} onBack={() => setActive(null)} profile={profile} go={go} />;
   }
 
   return (
@@ -154,23 +181,132 @@ export default function Practice({ profile, initial, go }: { profile: Profile; i
   );
 }
 
-function Workspace({ q, hideLabels, onBack, profile }: { q: Question; hideLabels: boolean; onBack: () => void; profile: Profile }) {
+/* ------------------------------------------------------------------ */
+/* Mental-trace stepper: step through code lines, track variable state */
+/* ------------------------------------------------------------------ */
+
+interface VarRow { id: string; name: string; value: string; }
+interface TraceStep { line: number; code: string; vars: { name: string; value: string }[]; }
+
+let varSeq = 0;
+const newVar = (): VarRow => ({ id: `v${++varSeq}`, name: "", value: "" });
+
+function MentalTrace({ code, onTrace }: { code: string; onTrace: (t: TraceStep[]) => void }) {
+  const lines = code.split("\n");
+  const [enabled, setEnabled] = useState(false);
+  const [step, setStep] = useState(-1);
+  const [vars, setVars] = useState<VarRow[]>([newVar()]);
+  const logRef = useRef<TraceStep[]>([]);
+
+  const record = (line: number, snapshot: VarRow[]) => {
+    const entry: TraceStep = {
+      line,
+      code: lines[line] ?? "",
+      vars: snapshot.filter((v) => v.name.trim()).map((v) => ({ name: v.name.trim(), value: v.value })),
+    };
+    const last = logRef.current[logRef.current.length - 1];
+    if (!last || last.line !== entry.line || JSON.stringify(last.vars) !== JSON.stringify(entry.vars)) {
+      logRef.current = [...logRef.current, entry];
+      onTrace(logRef.current);
+    }
+  };
+
+  const goStep = (next: number) => {
+    const clamped = Math.max(-1, Math.min(lines.length - 1, next));
+    setStep(clamped);
+    if (clamped >= 0) record(clamped, vars);
+  };
+
+  const setVarField = (id: string, field: "name" | "value", value: string) => {
+    setVars((prev) => {
+      const next = prev.map((v) => (v.id === id ? { ...v, [field]: value } : v));
+      if (step >= 0) record(step, next);
+      return next;
+    });
+  };
+
+  if (!enabled) {
+    return (
+      <div className="trace-bar">
+        <button className="btn ghost small" onClick={() => setEnabled(true)}>Start mental trace</button>
+        <span className="small">No-execution interviews: narrate your code line-by-line, tracking state on paper.</span>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="trace-bar">
+        <button className="btn ghost small" onClick={() => setEnabled(false)}>Hide trace</button>
+        <span className="small">Step through each line like the interviewer is watching. Update the table as you go.</span>
+      </div>
+      <div className="trace-lines">
+        {lines.map((ln, i) => (
+          <div key={i} className={`trace-line${i === step ? " cur" : ""}${i < step ? " done" : ""}`}>
+            <span className="ln">{i + 1}</span><span>{ln || " "}</span>
+          </div>
+        ))}
+      </div>
+      <div className="trace-step-row">
+        <button className="btn ghost small" disabled={step <= -1} onClick={() => goStep(step - 1)}>← Prev</button>
+        <button className="btn ghost small" disabled={step >= lines.length - 1} onClick={() => goStep(step + 1)}>Next →</button>
+        <span className="step-ind">line {step + 1} / {lines.length} · {logRef.current.length} traced step{logRef.current.length === 1 ? "" : "s"} logged</span>
+      </div>
+      <table className="vartable">
+        <thead><tr><th className="vname">Variable</th><th className="vval">Value</th><th className="vdel"></th></tr></thead>
+        <tbody>
+          {vars.map((v) => (
+            <tr key={v.id}>
+              <td><input className="vname" placeholder="i, left, …" value={v.name} onChange={(e) => setVarField(v.id, "name", e.target.value)} /></td>
+              <td><input className="vval" placeholder="0, 'ab', [1,2], …" value={v.value} onChange={(e) => setVarField(v.id, "value", e.target.value)} /></td>
+              <td><button className="btn ghost small vdel" onClick={() => setVars((p) => p.filter((x) => x.id !== v.id))} disabled={vars.length === 1}>✕</button></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button className="btn ghost small" style={{ marginTop: 8 }} onClick={() => setVars((p) => [...p, newVar()])}>+ Add variable</button>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Workspace                                                          */
+/* ------------------------------------------------------------------ */
+
+function formatTrace(log: TraceStep[]): string {
+  if (log.length === 0) return "(no trace recorded)";
+  return log.map((s, i) => {
+    const vs = s.vars.map((v) => `${v.name}=${v.value}`).join(", ");
+    return `step ${i + 1} [line ${s.line + 1}] ${s.code.trim()}${vs ? `  // ${vs}` : ""}`;
+  }).join("\n");
+}
+
+function Workspace({ q, hideLabels, onBack, profile, go }: {
+  q: Question; hideLabels: boolean; onBack: () => void; profile: Profile; go: (page: string, arg?: unknown) => void;
+}) {
   const timer = useTimer();
   const [started, setStarted] = useState(false);
   const [code, setCode] = useState("");
   const [notes, setNotes] = useState("");
+  const [traceLog, setTraceLog] = useState<TraceStep[]>([]);
   const [hintLevel, setHintLevel] = useState(0);
   const [chat, setChat] = useState<TutorTurn[]>([]);
   const [chatInput, setChatInput] = useState("");
   const [tutorBusy, setTutorBusy] = useState(false);
+  const [provider, setProvider] = useState<TutorProviderId | undefined>(undefined);
   const [showSubmit, setShowSubmit] = useState(false);
   const [outcome, setOutcome] = useState<AttemptOutcome>("solved");
   const [confidence, setConfidence] = useState(3);
   const [identified, setIdentified] = useState<boolean | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [celebration, setCelebration] = useState<CelebrationData | null>(null);
   const [error, setError] = useState("");
   const startTimeRef = useRef("");
+
+  useEffect(() => {
+    api().getTutorProvider().then(setProvider).catch(() => setProvider(undefined));
+  }, []);
 
   const begin = () => {
     startTimeRef.current = new Date().toISOString();
@@ -178,7 +314,7 @@ function Workspace({ q, hideLabels, onBack, profile }: { q: Question; hideLabels
     setStarted(true);
   };
 
-  const sendChat = async (message: string, level: number) => {
+  const sendCoach = async (message: string, level: number) => {
     if (!message.trim() && level === hintLevel) return;
     setTutorBusy(true);
     setError("");
@@ -213,7 +349,40 @@ function Workspace({ q, hideLabels, onBack, profile }: { q: Question; hideLabels
   const requestHint = () => {
     const level = Math.min(hintLevel + 1, 5);
     setHintLevel(level);
-    void sendChat("", level);
+    void sendCoach("", level);
+  };
+
+  const askCoach = () => {
+    const msg =
+      `I'm working on #${q.leetcodeId} ${q.title}. Here is my code so far:\n\n` +
+      `${code.trim() || "(no code written yet)"}\n\n` +
+      `My mental trace so far:\n${formatTrace(traceLog)}\n\n` +
+      `Elapsed active time: ${fmtMs(timer.activeMs)}. ` +
+      `Ask me ONE guiding Socratic question about my approach — do not reveal anything.`;
+    void sendCoach(msg, hintLevel);
+  };
+
+  const explainMistake = () => {
+    const msg =
+      `Here is my code for #${q.leetcodeId} ${q.title}:\n\n${code.trim() || "(no code written yet)"}\n\n` +
+      `Point at my mistake — which line is wrong and why — without rewriting the solution for me.`;
+    void sendCoach(msg, hintLevel);
+  };
+
+  const quizComplexity = () => {
+    void sendCoach(
+      `Quiz me on the time and space complexity of my current approach for #${q.leetcodeId} ${q.title}. ` +
+      `Ask me to state it and justify it first — do not give me the answer.`,
+      hintLevel,
+    );
+  };
+
+  const askEdgeCases = () => {
+    void sendCoach(
+      `I want to think about edge cases for #${q.leetcodeId} ${q.title}. ` +
+      `Ask me about ONE edge case at a time — do not list them all at once.`,
+      hintLevel,
+    );
   };
 
   const submit = async () => {
@@ -231,9 +400,20 @@ function Workspace({ q, hideLabels, onBack, profile }: { q: Question; hideLabels
         confidence,
         patternIdentifiedUnaided: hideLabels ? identified : null,
         labelShown: !hideLabels,
-        notes: `--- code ---\n${code}\n--- notes ---\n${notes}`,
+        notes: `--- code ---\n${code}\n--- trace ---\n${formatTrace(traceLog)}\n--- notes ---\n${notes}`,
       });
       timer.stop();
+      let newLevel: number | undefined;
+      try {
+        const gs = await api().getGameState();
+        newLevel = gs.level;
+      } catch { /* non-fatal */ }
+      setCelebration({
+        xpGained: r.xpGained,
+        leveledUp: r.leveledUp,
+        newLevel,
+        newAchievements: r.newAchievements,
+      });
       setResult(
         `Recorded: ${outcome} in ${fmtMs(timer.activeMs)} with ${hintLevel} hint${hintLevel === 1 ? "" : "s"}. ` +
         `Pattern mastery now ${Math.round(r.patternState.mastery * 100)}%. Next review: ${r.reviewItem.nextReview}.`,
@@ -248,6 +428,7 @@ function Workspace({ q, hideLabels, onBack, profile }: { q: Question; hideLabels
 
   return (
     <div>
+      <Celebration data={celebration} onDone={() => setCelebration(null)} />
       <button className="btn ghost small" onClick={onBack}>← Back to questions</button>
       <div className="row" style={{ justifyContent: "space-between", marginTop: 12 }}>
         <h1 style={{ margin: 0 }}>#{q.leetcodeId} {q.title}</h1>
@@ -258,6 +439,14 @@ function Workspace({ q, hideLabels, onBack, profile }: { q: Question; hideLabels
         <a href={q.leetcodeUrl} target="_blank" rel="noreferrer">Open on LeetCode ↗</a>
         <span className="small"> · solve there, trace here — no code execution in interview rehearsal</span>
       </p>
+
+      {provider === "none" && (
+        <div className="offline-banner">
+          <span className="dot" />
+          <span style={{ flex: 1 }}><b>Training offline</b> <span className="small">— connect Claude Code to train for Meta's AI round.</span></span>
+          <button className="btn small" onClick={() => go("settings")}>Connect</button>
+        </div>
+      )}
 
       {error && <div className="err">{error}</div>}
       {result && <div className="card"><span className="ok">{result}</span></div>}
@@ -281,25 +470,34 @@ function Workspace({ q, hideLabels, onBack, profile }: { q: Question; hideLabels
             {timer.paused && <p className="small">Paused — background/away time doesn't count against you.</p>}
           </div>
 
-          <div className="grid2">
-            <div>
+          <div className="prac-wrap">
+            <div className="prac-main">
               <h2>Code pad</h2>
               <textarea
-                style={{ minHeight: 320, fontFamily: "ui-monospace, Menlo, monospace", fontSize: 13 }}
+                className="codepad"
                 placeholder={`# ${profile.language} — draft your solution here\n# No execution: practice mental tracing like the real interview`}
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
               />
-              <h2>Trace & notes</h2>
-              <textarea placeholder="Manual trace: walk through your example input step by step…" value={notes} onChange={(e) => setNotes(e.target.value)} />
+              <h2>Trace</h2>
+              <MentalTrace code={code || "# write code above, then trace it"} onTrace={setTraceLog} />
+              <h2>Notes</h2>
+              <textarea placeholder="Scratch thoughts, plan, observations…" value={notes} onChange={(e) => setNotes(e.target.value)} />
             </div>
-            <div>
-              <h2>Coach</h2>
-              <div className="row">
-                <button className="btn ghost small" disabled={tutorBusy} onClick={requestHint}>
-                  {tutorBusy ? "Thinking…" : `Get hint (${hintLevel}/5)`}
+            <div className="coach card">
+              <h3 style={{ marginTop: 0 }}>Coach</h3>
+              <div className="coach-actions">
+                <button className="btn small" disabled={tutorBusy} onClick={askCoach}>
+                  {tutorBusy ? "Thinking…" : "Ask coach"}
                 </button>
-                <span className="small">Socratic — hints guide, never reveal.</span>
+                <button className="btn ghost small" disabled={tutorBusy} onClick={requestHint}>
+                  {tutorBusy ? "…" : `Hint (${hintLevel}/5)`}
+                </button>
+              </div>
+              <div className="coach-actions">
+                <button className="btn ghost small" disabled={tutorBusy || !code.trim()} onClick={explainMistake}>Explain my mistake</button>
+                <button className="btn ghost small" disabled={tutorBusy} onClick={quizComplexity}>Quiz me: complexity</button>
+                <button className="btn ghost small" disabled={tutorBusy} onClick={askEdgeCases}>Edge cases?</button>
               </div>
               <div className="chat">
                 {chat.map((m, i) => (
@@ -313,9 +511,9 @@ function Workspace({ q, hideLabels, onBack, profile }: { q: Question; hideLabels
                   placeholder="Ask the coach…"
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === "Enter") void sendChat(chatInput, hintLevel); }}
+                  onKeyDown={(e) => { if (e.key === "Enter") void sendCoach(chatInput, hintLevel); }}
                 />
-                <button className="btn small" disabled={tutorBusy} onClick={() => void sendChat(chatInput, hintLevel)}>Send</button>
+                <button className="btn small" disabled={tutorBusy} onClick={() => void sendCoach(chatInput, hintLevel)}>Send</button>
               </div>
             </div>
           </div>

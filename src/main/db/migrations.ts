@@ -5,7 +5,7 @@
  * append-only event logs.
  */
 
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
 
 export interface Migration {
   version: number;
@@ -139,6 +139,38 @@ export const MIGRATIONS: Migration[] = [
     sql: `
     -- meta table (from v1) stores: schema_version, device_id, sync_folder, last_merge_at
     CREATE INDEX IF NOT EXISTS idx_attempts_device ON attempts(device_id);
+    `,
+  },
+  {
+    version: 4,
+    description: "Game layer: achievements, drill completions, Friday mock sessions",
+    sql: `
+    CREATE TABLE IF NOT EXISTS achievements (
+      id TEXT PRIMARY KEY,          -- achievement id, e.g. 'first-blood'
+      unlocked_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS drill_completions (
+      id TEXT PRIMARY KEY,
+      pair_a TEXT NOT NULL,
+      pair_b TEXT NOT NULL,
+      completed_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS idx_drills_completed ON drill_completions(completed_at);
+
+    CREATE TABLE IF NOT EXISTS mock_sessions (
+      id TEXT PRIMARY KEY,
+      device_id TEXT NOT NULL,
+      kind TEXT NOT NULL,            -- coding | system-design | behavioral
+      reference TEXT NOT NULL,       -- question id or prompt text
+      score INTEGER,                 -- 0..100, set at debrief
+      notes TEXT NOT NULL DEFAULT '',-- debrief text
+      duration_ms INTEGER,
+      started_at TEXT NOT NULL,
+      ended_at TEXT,
+      created_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS idx_mocks_created ON mock_sessions(created_at);
     `,
   },
 ];

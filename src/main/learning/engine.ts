@@ -1,9 +1,10 @@
 import { randomUUID } from "node:crypto";
 import { getDb, getDeviceId } from "../db";
 import { appendEvent } from "../sync/events";
-import type { Attempt, AttemptInput, PatternState, Question, ReviewItem } from "../../shared/types";
+import type { Achievement, Attempt, AttemptInput, PatternState, Question, ReviewItem } from "../../shared/types";
 import { calculateSM2, performanceToQuality, targetMsFor, SM2Quality } from "./sm2";
 import { updateMastery, PRIOR } from "./knowledge";
+import { totalXp, levelForXp, evaluateNewAchievements } from "../game";
 
 const nowIso = () => new Date().toISOString();
 
@@ -107,12 +108,22 @@ export function countPreviousAttempts(questionId: number): number {
 
 /**
  * Record an attempt (append-only), then derive pattern mastery and review
- * scheduling from it. Returns the updated state for immediate UI use.
+ * scheduling from it. Returns the updated state for immediate UI use,
+ * plus XP/level/achievement deltas for the game layer.
  */
-export function recordAttempt(input: AttemptInput): { attempt: Attempt; patternState: PatternState; reviewItem: ReviewItem } {
+export function recordAttempt(input: AttemptInput): {
+  attempt: Attempt;
+  patternState: PatternState;
+  reviewItem: ReviewItem;
+  xpGained: number;
+  leveledUp: boolean;
+  newAchievements: Achievement[];
+} {
   const db = getDb();
   const question = getQuestionInternal(input.questionId);
   if (!question) throw new Error(`Unknown question ${input.questionId}`);
+
+  const xpBefore = totalXp();
 
   const attempt: Attempt = {
     ...input,
@@ -193,7 +204,12 @@ export function recordAttempt(input: AttemptInput): { attempt: Attempt; patternS
   // Append to this device's sync log (no-op when sync isn't configured)
   appendEvent("attempt", "upsert", { ...attempt });
 
-  return { attempt, patternState: updatedPs, reviewItem };
+  const xpAfter = totalXp();
+  const xpGained = Math.max(0, xpAfter - xpBefore);
+  const leveledUp = levelForXp(xpAfter) > levelForXp(xpBefore);
+  const newAchievements = evaluateNewAchievements();
+
+  return { attempt, patternState: updatedPs, reviewItem, xpGained, leveledUp, newAchievements };
 }
 
 export function listAttemptsInternal(questionId?: number): Attempt[] {

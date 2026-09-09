@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api";
 import type { Company, DesignSession, Profile, TutorTurn } from "../../../shared/types";
 import { COMPANIES, COMPANY_LABELS } from "../../../shared/types";
+import "../ai.css";
 
 export default function Design({ profile }: { profile: Profile }) {
   const [company, setCompany] = useState<Company>(profile.targetCompanies[0] ?? "meta");
@@ -63,6 +64,7 @@ function SessionEditor({ session, onBack }: { session: DesignSession; onBack: ()
   const [chatInput, setChatInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [interviewMode, setInterviewMode] = useState(false);
 
   const save = async () => {
     const updated = await api().saveDesignSession({ ...s, endedAt: s.endedAt ?? undefined });
@@ -71,18 +73,15 @@ function SessionEditor({ session, onBack }: { session: DesignSession; onBack: ()
     setTimeout(() => setSaved(false), 2000);
   };
 
-  const askInterviewer = async () => {
-    if (!chatInput.trim()) return;
+  const sendChat = async (history: TutorTurn[], message: string, mode?: "mock") => {
     setBusy(true);
-    const history = [...chat, { role: "user" as const, text: chatInput, at: new Date().toISOString() }];
-    setChat(history);
-    setChatInput("");
     try {
       const res = await api().tutorChat({
         kind: "system-design",
+        mode,
         prompt: s.prompt,
         history,
-        userMessage: chatInput,
+        userMessage: message,
         context: { company: s.company ?? undefined },
       });
       setChat([...history, { role: "tutor", text: res.reply, at: new Date().toISOString() }]);
@@ -91,6 +90,31 @@ function SessionEditor({ session, onBack }: { session: DesignSession; onBack: ()
     } finally {
       setBusy(false);
     }
+  };
+
+  const askInterviewer = async () => {
+    if (!chatInput.trim()) return;
+    const history = [...chat, { role: "user" as const, text: chatInput, at: new Date().toISOString() }];
+    setChat(history);
+    setChatInput("");
+    await sendChat(history, history[history.length - 1].text, interviewMode ? "mock" : undefined);
+  };
+
+  const summonInterviewer = async () => {
+    const message = chat.length === 0
+      ? `Run this as a timed interviewer. The design prompt is: "${s.prompt}". Start the round — let me drive, withhold critique until checkpoints.`
+      : "Continue in interviewer mode — ask your next question.";
+    const history = [...chat, { role: "user" as const, text: message, at: new Date().toISOString() }];
+    setChat(history);
+    setInterviewMode(true);
+    await sendChat(history, message, "mock");
+  };
+
+  const twist10x = async () => {
+    const message = "The interviewer drops a twist: traffic just 10x'd overnight. What breaks first?";
+    const history = [...chat, { role: "user" as const, text: message, at: new Date().toISOString() }];
+    setChat(history);
+    await sendChat(history, message, interviewMode ? "mock" : undefined);
   };
 
   const field = (key: "requirements" | "estimates" | "decisions" | "tradeoffs" | "followups" | "feedback", label: string) => (
@@ -121,8 +145,25 @@ function SessionEditor({ session, onBack }: { session: DesignSession; onBack: ()
           </div>
         </div>
         <div>
-          <h2>AI interviewer</h2>
-          <p className="small">Withholds critique until checkpoints. Talk through your design out loud, then type the key points.</p>
+          <div className="ai-panel-head">
+            <h2 style={{ margin: 0 }}>AI interviewer</h2>
+            <label className="ai-toggle" title="Interviewer acts like a real interview: asks, withholds critique, no teaching">
+              <input type="checkbox" checked={interviewMode} onChange={(e) => setInterviewMode(e.target.checked)} />
+              AI interview mode
+            </label>
+          </div>
+          <p className="small">
+            Withholds critique until checkpoints. Talk through your design out loud, then type the key points.
+            {interviewMode && " Interview mode is ON — the AI runs the round like a real interviewer."}
+          </p>
+          <div className="quick-actions">
+            <button className="btn ghost small" disabled={busy} onClick={() => void summonInterviewer()}>
+              🎙️ Summon interviewer
+            </button>
+            <button className="ai-twist" disabled={busy} onClick={() => void twist10x()}>
+              ⚡ 10x twist
+            </button>
+          </div>
           <div className="chat">
             {chat.map((m, i) => <div key={i} className={`msg ${m.role}`}>{m.text}</div>)}
             {chat.length === 0 && <span className="small">Ask the interviewer to begin, or present your requirements.</span>}
